@@ -4,6 +4,7 @@ import { useState } from "react";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import UniBadge from "@/components/UniBadge";
 
 const fields = [
   "Engineering", "Medicine/Health", "Law", "Commerce/Business", "Arts/Humanities",
@@ -144,7 +145,7 @@ export default function UniversityMatcherPage() {
                     <div className="flex items-center gap-2 mb-1">
                       {i < 3 && <span className="text-[10px] font-bold bg-teal-50 text-teal px-2 py-0.5 rounded-full">Great match</span>}
                     </div>
-                    <h3 className="font-bold text-navy">{uni.name}</h3>
+                    <h3 className="font-bold text-navy flex items-center gap-2"><UniBadge uni={uni.name} size="md" />{uni.name}</h3>
                     <p className="text-sm text-navy/50">{uni.city} · ~{uni.costPerWeek}/week</p>
                     {uni.reasons.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-2">

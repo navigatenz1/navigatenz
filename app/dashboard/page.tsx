@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import UniBadge from "@/components/UniBadge";
 import { useAuth } from "@/lib/auth-context";
 import { createClient } from "@/lib/supabase/client";
 import {
@@ -49,6 +50,7 @@ const tabs = [
   { id: "overview", label: "Overview", icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" },
   { id: "pathway", label: "My Pathway", icon: "M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" },
   { id: "modules", label: "Modules", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+  { id: "tools", label: "Tools", icon: "M11.42 15.17l-5.658-5.66a2.25 2.25 0 010-3.182l.44-.439a2.25 2.25 0 013.182 0l5.657 5.657a2.25 2.25 0 010 3.182l-.44.44a2.25 2.25 0 01-3.181 0z M21.75 12a9.75 9.75 0 11-19.5 0 9.75 9.75 0 0119.5 0z" },
   { id: "guides", label: "Guides for You", icon: "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" },
   { id: "settings", label: "Settings", icon: "M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z M15 12a3 3 0 11-6 0 3 3 0 016 0z" },
 ];
@@ -233,6 +235,7 @@ export default function DashboardPage() {
               {tab === "modules" && (
                 <ModulesTab completedModules={completedModules} />
               )}
+              {tab === "tools" && <ToolsTab />}
               {tab === "settings" && (
                 <SettingsTab
                   name={profileName}
@@ -496,7 +499,7 @@ function OverviewTab({
             <div className="flex flex-wrap gap-1 mt-0.5">
               {assessment.preferred_universities.length > 0
                 ? assessment.preferred_universities.map((u) => (
-                    <span key={u} className="text-xs bg-teal-50 text-teal-700 px-2 py-0.5 rounded-full font-medium">{u.split(" ").pop()}</span>
+                    <UniBadge key={u} uni={u} showName />
                   ))
                 : <span className="text-sm text-navy/40">—</span>}
             </div>
@@ -577,6 +580,25 @@ function OverviewTab({
             ))}
           </div>
         )}
+      </div>
+
+      {/* Your Tools */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-bold text-navy">Your Tools</h2>
+          <Link href="/tools" className="text-xs text-teal font-medium hover:text-teal-600 transition-colors">View all</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {dashboardTools.slice(0, 4).map((tool) => (
+            <Link key={tool.href} href={tool.href} className="group flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 hover:border-teal/30 hover:shadow-sm transition-all">
+              <span className="text-lg flex-shrink-0">{tool.icon}</span>
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-navy group-hover:text-teal transition-colors truncate">{tool.title}</p>
+                <p className="text-xs text-navy/40 truncate">{tool.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Quick Access */}
@@ -668,6 +690,43 @@ function PathwayTab({ milestones, progress, assessment }: { milestones: Mileston
 }
 
 /* ── Guides Tab ── */
+/* ── Modules Tab ── */
+/* ── Tools Tab ── */
+const dashboardTools = [
+  { href: "/tools/credit-calculator", icon: "🧮", title: "NCEA Credit Calculator", desc: "Check if you're on track for NCEA and UE" },
+  { href: "/tools/university-matcher", icon: "🧭", title: "University Matcher", desc: "Find your best-fit NZ university" },
+  { href: "/tools/scholarship-finder", icon: "🔍", title: "Scholarship Finder", desc: "Search 20+ NZ scholarships" },
+  { href: "/tools/key-dates", icon: "📅", title: "Key Dates", desc: "Never miss a deadline" },
+  { href: "/tools/personal-statement", icon: "✍️", title: "Personal Statement", desc: "Write your statement step by step" },
+];
+
+function ToolsTab() {
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-bold text-navy">Your Tools</h1>
+        <p className="text-navy/50 mt-1 text-sm">Free interactive tools to help you plan and prepare</p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {dashboardTools.map((tool) => (
+          <Link key={tool.href} href={tool.href} className="group">
+            <Card accent className="p-5 h-full">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl flex-shrink-0">{tool.icon}</span>
+                <div>
+                  <p className="font-semibold text-navy text-sm group-hover:text-teal transition-colors">{tool.title}</p>
+                  <p className="text-xs text-navy/50 mt-0.5">{tool.desc}</p>
+                  <span className="text-teal text-xs font-medium mt-2 inline-flex items-center gap-1">Try it <span>&rarr;</span></span>
+                </div>
+              </div>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ── Modules Tab ── */
 function ModulesTab({ completedModules }: { completedModules: string[] }) {
   const doneCount = completedModules.length;

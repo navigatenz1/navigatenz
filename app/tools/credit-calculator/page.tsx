@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Container from "@/components/Container";
 import QualificationChangeNotice from "@/components/QualificationChangeNotice";
+import UniBadge from "@/components/UniBadge";
+import { allProgrammes, calcRankScore } from "@/lib/programmes";
 
 function Bar({ value, max, label }: { value: number; max: number; label: string }) {
   const pct = Math.min((value / max) * 100, 100);
@@ -37,6 +39,15 @@ export default function CreditCalculatorPage() {
   const [reading, setReading] = useState(0);
   const [writing, setWriting] = useState(0);
   const [numeracy, setNumeracy] = useState(0);
+  const [selUni, setSelUni] = useState("");
+  const [selProg, setSelProg] = useState("");
+  const [achieved, setAchieved] = useState(0);
+  const [merit, setMerit] = useState(0);
+  const [excellence, setExcellence] = useState(0);
+
+  const rankScore = calcRankScore(achieved, merit, excellence);
+  const uniProgs = allProgrammes.find((u) => u.uni === selUni);
+  const selectedProg = uniProgs?.programmes.find((p) => p.name === selProg);
 
   const ncea1Met = l1 + l2 + l3 >= 60;
   const ncea2L2 = l2 + l3 >= 60;
@@ -155,6 +166,109 @@ export default function CreditCalculatorPage() {
                   )}
                 </div>
               </div>
+            </div>
+
+            {/* Rank Score Calculator */}
+            <div className="bg-white rounded-2xl border border-gray-100 p-6 mt-8">
+              <h2 className="font-bold text-navy text-lg mb-1">Rank Score Calculator</h2>
+              <p className="text-navy/50 text-xs mb-4">Auckland uses rank scores. Enter your Level 3 credit breakdown to calculate yours.</p>
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                <div>
+                  <label className="block text-xs text-navy/50 mb-1">Achieved</label>
+                  <input type="number" min={0} max={200} value={achieved || ""} onChange={(e) => setAchieved(+e.target.value || 0)} className={inp} placeholder="0" />
+                </div>
+                <div>
+                  <label className="block text-xs text-navy/50 mb-1">Merit</label>
+                  <input type="number" min={0} max={200} value={merit || ""} onChange={(e) => setMerit(+e.target.value || 0)} className={inp} placeholder="0" />
+                </div>
+                <div>
+                  <label className="block text-xs text-navy/50 mb-1">Excellence</label>
+                  <input type="number" min={0} max={200} value={excellence || ""} onChange={(e) => setExcellence(+e.target.value || 0)} className={inp} placeholder="0" />
+                </div>
+              </div>
+              <div className="p-4 bg-soft rounded-xl">
+                <p className="text-sm text-navy/60">Your estimated rank score:</p>
+                <p className="text-3xl font-bold text-teal">{rankScore}<span className="text-sm font-normal text-navy/40">/320</span></p>
+                <p className="text-xs text-navy/40 mt-1">Best 80 credits: Achieved×2 + Merit×3 + Excellence×4</p>
+              </div>
+            </div>
+
+            {/* Programme Checker */}
+            <div className="bg-white rounded-2xl border border-gray-100 p-6 mt-8">
+              <h2 className="font-bold text-navy text-lg mb-1">Check Programme Requirements</h2>
+              <p className="text-navy/50 text-xs mb-4">Select a university and programme to see specific entry requirements.</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <div>
+                  <label className="block text-xs text-navy/50 mb-1">University</label>
+                  <select value={selUni} onChange={(e) => { setSelUni(e.target.value); setSelProg(""); }} className={inp}>
+                    <option value="">Select university...</option>
+                    {allProgrammes.map((u) => (
+                      <option key={u.uni} value={u.uni}>{u.uni}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-navy/50 mb-1">Programme</label>
+                  <select value={selProg} onChange={(e) => setSelProg(e.target.value)} className={inp} disabled={!selUni}>
+                    <option value="">Select programme...</option>
+                    {uniProgs?.programmes.map((p) => (
+                      <option key={p.name} value={p.name}>{p.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {selectedProg && (
+                <div className="p-5 bg-soft rounded-xl space-y-3">
+                  <div className="flex items-center gap-2 mb-3">
+                    <UniBadge uni={selUni} size="md" />
+                    <div>
+                      <p className="font-bold text-navy text-sm">{selectedProg.name}</p>
+                      <p className="text-xs text-navy/50">{selUni}</p>
+                    </div>
+                  </div>
+
+                  {/* UE check */}
+                  <div className="flex items-center gap-2 py-1.5">
+                    <span className={ueMet ? "text-teal" : "text-coral"}>{ueMet ? "✅" : "❌"}</span>
+                    <span className="text-sm text-navy">University Entrance</span>
+                  </div>
+
+                  {/* Rank score check */}
+                  {selectedProg.rankScore && (
+                    <div className="flex items-center gap-2 py-1.5">
+                      <span className={rankScore >= selectedProg.rankScore ? "text-teal" : "text-coral"}>
+                        {rankScore >= selectedProg.rankScore ? "✅" : "❌"}
+                      </span>
+                      <span className="text-sm text-navy">
+                        Rank score {selectedProg.rankScore}+ required (yours: {rankScore})
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Subject requirements */}
+                  {selectedProg.subjectsRequired?.map((subj) => (
+                    <div key={subj} className="flex items-center gap-2 py-1.5">
+                      <span className="text-gold">⚠️</span>
+                      <span className="text-sm text-navy">Level 3 {subj} required/recommended</span>
+                    </div>
+                  ))}
+
+                  {/* Extra requirements */}
+                  {selectedProg.extras?.map((extra) => (
+                    <div key={extra} className="flex items-center gap-2 py-1.5">
+                      <span className="text-gold">⚠️</span>
+                      <span className="text-sm text-navy font-medium">{extra}</span>
+                    </div>
+                  ))}
+
+                  {/* Notes */}
+                  {selectedProg.notes && (
+                    <p className="text-xs text-navy/50 pt-2 border-t border-gray-200">{selectedProg.notes}</p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </Container>

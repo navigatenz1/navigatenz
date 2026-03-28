@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Container from "@/components/Container";
 import Card from "@/components/Card";
 import { scholarships } from "@/lib/scholarships";
+import UniBadge from "@/components/UniBadge";
 
 const unis = ["All", "Auckland", "Otago", "Victoria", "Canterbury", "Waikato", "Massey", "AUT", "Lincoln", "External"];
 const types = ["All", "Academic", "Equity", "Leadership", "Subject", "Community"];
@@ -80,7 +81,10 @@ export default function ScholarshipFinderPage() {
                         <h3 className="font-bold text-navy text-sm">{s.name}</h3>
                         <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${typeBadge[s.type] || "bg-gray-100 text-gray-600"}`}>{s.type}</span>
                       </div>
-                      <p className="text-xs text-navy/50">{s.org}</p>
+                      <p className="text-xs text-navy/50 flex items-center gap-1.5">
+                        {s.uni !== "External" && <UniBadge uni={s.uni} />}
+                        {s.org}
+                      </p>
                       <p className="text-xs text-navy/60 mt-1">{s.eligibility}</p>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
