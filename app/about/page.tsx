@@ -39,24 +39,21 @@ export default function AboutPage() {
           <ScrollReveal>
             <div className="max-w-3xl mx-auto">
               <div className="flex flex-col md:flex-row gap-12 items-start">
-                {/* Founder photo placeholder */}
+                {/* Founder avatar */}
                 <div className="flex-shrink-0 w-full md:w-52">
-                  <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-teal-50 to-teal-100 flex items-center justify-center relative overflow-hidden border-4 border-white shadow-xl shadow-teal/10">
-                    <div className="bg-dot-pattern" />
-                    <div className="relative flex flex-col items-center">
-                      <svg width="56" height="56" fill="none" viewBox="0 0 24 24" stroke="#2A9D8F" strokeWidth="1" opacity="0.35">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                      </svg>
-                    </div>
+                  <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-teal to-teal-600 flex items-center justify-center border-4 border-white shadow-xl shadow-teal/20">
+                    <span className="text-white text-5xl font-bold">UK</span>
                   </div>
-                  <p className="text-center text-sm text-navy/40 mt-4 font-medium">Photo coming soon</p>
                 </div>
 
                 {/* Story */}
                 <div className="space-y-5 text-navy/70 leading-[1.8] text-[1.05rem]">
                   <h2 className="text-2xl font-bold text-navy">Our Story</h2>
                   <p>
-                    Navigate NZ was founded by a first-gen immigrant student who switched between schools and saw firsthand how families without connections are left to figure out the system alone. The New Zealand education system is full of choices, pathways, and deadlines — but if you&apos;re the first in your family to go through it, no one tells you the rules.
+                    Navigate NZ was founded by Uzair Khan, a student who moved to New Zealand as a child from a South Asian background.
+                  </p>
+                  <p>
+                    Having switched between multiple schools, Uzair saw firsthand how dramatically different the resources and guidance available to students could be. Families without connections were left to figure out the system alone — navigating NCEA credits, university entrance requirements, and scholarship deadlines with no one to ask.
                   </p>
 
                   {/* Pull quote */}
@@ -67,14 +64,31 @@ export default function AboutPage() {
                   </blockquote>
 
                   <p>
-                    Our founder moved to New Zealand as a teenager, switching between schools and trying to make sense of NCEA credits, university entrance requirements, and scholarship applications — all without a guidebook or a family member who&apos;d been through it before.
+                    The information was out there, scattered across government websites, school handbooks, and word-of-mouth from classmates whose parents already knew the system. But for families going through it for the first time — especially those from migrant backgrounds — putting it all together felt impossible.
                   </p>
                   <p>
-                    The information was out there, scattered across government websites, school handbooks, and word-of-mouth from classmates whose parents knew the system. But for first-generation students — especially those from migrant and refugee backgrounds — putting it all together felt impossible.
+                    Navigate NZ is the resource Uzair wished his family had. Free, in plain language, and built specifically for students and families who are navigating this for the first time.
                   </p>
                   <p>
-                    Navigate NZ is the resource we wish we&apos;d had. Free, in plain language, and built specifically for students and families who are navigating this for the first time.
+                    What started as a personal frustration became a mission: to make sure no student in New Zealand is disadvantaged simply because their family doesn&apos;t know how the system works.
                   </p>
+                  <p>
+                    Today, Navigate NZ offers free guides, personalised pathway assessments, interactive tools, and action modules — all built to help first-generation students and their families find their way to university.
+                  </p>
+                </div>
+              </div>
+
+              {/* Meet the Founder card */}
+              <div className="mt-12 p-6 sm:p-8 bg-soft rounded-2xl">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                  <div className="w-16 h-16 rounded-full bg-teal flex items-center justify-center text-white text-xl font-bold flex-shrink-0">UK</div>
+                  <div>
+                    <h3 className="font-bold text-navy text-lg">Uzair Khan</h3>
+                    <p className="text-teal text-sm font-medium">Founder, Navigate NZ</p>
+                    <p className="text-navy/60 text-sm leading-relaxed mt-2">
+                      Uzair is a student in Auckland who moved to New Zealand as a child. After switching between schools and experiencing the education system&apos;s gaps firsthand, he built Navigate NZ to help families like his own. He also runs a YouTube tutoring channel and develops gamified education platforms.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -113,7 +113,7 @@ export default function ImpactPage() {
       <section className="py-16 sm:py-20 bg-teal text-white text-center">
         <Container>
           <p className="text-xl sm:text-2xl font-bold mb-3">100% free. 100% independent. 100% nonprofit.</p>
-          <p className="text-white/70 max-w-xl mx-auto">Built by a first-generation immigrant student in Auckland. No ads, no sponsors, no data selling — ever.</p>
+          <p className="text-white/70 max-w-xl mx-auto">Built by Uzair Khan, a first-generation student in Auckland. No ads, no sponsors, no data selling — ever.</p>
           <div className="mt-8">
             <Button href="/guides" variant="secondary">Explore the Platform</Button>
           </div>
