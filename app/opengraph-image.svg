@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B2A4A"/>
+      <stop offset="100%" stop-color="#162240"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="1000" cy="150" r="200" fill="#2A9D8F" opacity="0.06"/>
+  <circle cx="200" cy="500" r="150" fill="#E9C46A" opacity="0.05"/>
+
+  <!-- Logo N -->
+  <path d="M100 420V210L260 420V210" stroke="#2A9D8F" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="260" cy="195" r="10" fill="#E9C46A"/>
+  <circle cx="100" cy="435" r="8" fill="#E85D4A"/>
+
+  <!-- Text: Navigate NZ -->
+  <text x="310" y="310" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="white">Navigate</text>
+  <text x="690" y="310" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#2A9D8F">NZ</text>
+
+  <!-- Tagline -->
+  <text x="310" y="370" font-family="system-ui, sans-serif" font-size="28" fill="rgba(255,255,255,0.6)">Free education guidance for first-gen students &amp; families</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="590" width="1200" height="40" fill="#2A9D8F" opacity="0.3"/>
+  <text x="600" y="616" font-family="system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.7)" text-anchor="middle">navigatenz.org · 100% Free · No ads · No sponsors</text>
+</svg>

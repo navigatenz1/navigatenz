@@ -30,6 +30,13 @@ export const metadata: Metadata = {
     "free education guide",
   ],
   metadataBase: new URL("https://navigatenz.org"),
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.svg" }],
+  },
+  other: {
+    "theme-color": "#1B2A4A",
+  },
   openGraph: {
     title: "Navigate NZ — Free Education Guidance for First-Gen Students & Families",
     description:
