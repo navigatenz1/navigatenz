@@ -24,6 +24,15 @@ const guideMeta: Record<string, { title: string; description: string; readTime: 
   "how-to-get-into-university": { title: "How to Get Into a NZ University", description: "University Entrance, applications, key dates, and scholarships", readTime: "12 min read", category: "Applying to University" },
   "your-rights-and-support": { title: "Your Rights and Support", description: "ESOL support, financial help, and what schools must provide", readTime: "6 min read", category: "Understanding the System" },
   "scholarship-guide": { title: "Scholarship Guide", description: "How to find and apply for scholarships in NZ", readTime: "7 min read", category: "Applying to University" },
+  "nz-qualification-changes": { title: "NZ Qualification Changes", description: "NCEA is being replaced from 2028-2030", readTime: "7 min read", category: "Understanding the System" },
+  "understanding-ncea-credits": { title: "Understanding NCEA Credits", description: "Credits, endorsements, and UE requirements explained", readTime: "10 min read", category: "Understanding the System" },
+  "subject-selection-strategy": { title: "Subject Selection Strategy", description: "How to choose your subjects wisely", readTime: "8 min read", category: "Choosing Your Path" },
+  "preparing-for-exams": { title: "Preparing for Exams", description: "What actually works for exam prep", readTime: "9 min read", category: "Choosing Your Path" },
+  "what-to-do-if-behind": { title: "What to Do If You're Behind", description: "Options when credits or grades aren't where they need to be", readTime: "7 min read", category: "Understanding the System" },
+  "first-gen-experience": { title: "The First-Gen Experience", description: "What it's like and why you belong", readTime: "6 min read", category: "For Parents & Families" },
+  "guide-for-parents": { title: "A Guide for Parents and Families", description: "Everything parents need to know", readTime: "8 min read", category: "For Parents & Families" },
+  "studylink-complete-guide": { title: "StudyLink Complete Guide", description: "Student loans, allowances, and how to apply", readTime: "9 min read", category: "Applying to University" },
+  "university-open-days": { title: "Making the Most of Open Days", description: "How to make open days count", readTime: "5 min read", category: "Applying to University" },
 };
 
 interface AssessmentRow {
@@ -53,6 +62,7 @@ export default function DashboardPage() {
   const [profileName, setProfileName] = useState("");
   const [profileEmail, setProfileEmail] = useState("");
   const [profileType, setProfileType] = useState("");
+  const [bookmarkedSlugs, setBookmarkedSlugs] = useState<string[]>([]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   // Redirect if not logged in
@@ -78,7 +88,11 @@ export default function DashboardPage() {
         .select("module_slug")
         .eq("user_id", user.id)
         .eq("completed", true),
-    ]).then(([assessRes, profileRes, modRes]) => {
+      supabase
+        .from("bookmarks")
+        .select("guide_slug")
+        .eq("user_id", user.id),
+    ]).then(([assessRes, profileRes, modRes, bookRes]) => {
       if (assessRes.data && assessRes.data.length > 0) {
         setAssessment(assessRes.data[0] as AssessmentRow);
       }
@@ -92,8 +106,10 @@ export default function DashboardPage() {
         setProfileType(user.user_metadata?.user_type || "student");
       }
       if (modRes.data) {
-        // Only top-level module slugs (no colons = item-level)
         setCompletedModules(modRes.data.map((r) => r.module_slug).filter((s: string) => !s.includes(":")));
+      }
+      if (bookRes.data) {
+        setBookmarkedSlugs(bookRes.data.map((r) => r.guide_slug));
       }
       setDataLoading(false);
     });
@@ -202,6 +218,7 @@ export default function DashboardPage() {
                   recommendedSlugs={recommendedSlugs}
                   progress={progress}
                   completedModules={completedModules}
+                  bookmarkedSlugs={bookmarkedSlugs}
                 />
               )}
               {tab === "pathway" && (
@@ -312,6 +329,29 @@ function MilestoneRow({ m, isLast, expanded }: { m: Milestone; isLast: boolean; 
 }
 
 /* ── Overview Tab ── */
+function getKeyDates(yearLevel: string) {
+  const now = new Date();
+  const year = now.getFullYear();
+  const dates: { label: string; date: Date; urgent?: boolean }[] = [];
+
+  if (["year-12", "year-13", "finished"].includes(yearLevel)) {
+    dates.push({ label: "Scholarship applications open", date: new Date(year, 7, 1) });
+    dates.push({ label: "University applications open", date: new Date(year, 7, 15) });
+  }
+  if (["year-13"].includes(yearLevel)) {
+    dates.push({ label: "NCEA external exams begin", date: new Date(year, 10, 1) });
+    dates.push({ label: "University application deadline", date: new Date(year, 11, 1) });
+  }
+
+  return dates
+    .map((d) => {
+      const diff = Math.ceil((d.date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+      return { ...d, daysAway: diff, urgent: diff <= 30 && diff > 0 };
+    })
+    .filter((d) => d.daysAway > -7)
+    .sort((a, b) => a.daysAway - b.daysAway);
+}
+
 function OverviewTab({
   firstName,
   assessment,
@@ -320,6 +360,7 @@ function OverviewTab({
   recommendedSlugs,
   progress,
   completedModules,
+  bookmarkedSlugs,
 }: {
   firstName: string;
   assessment: AssessmentRow;
@@ -328,10 +369,15 @@ function OverviewTab({
   recommendedSlugs: string[];
   progress: number;
   completedModules: string[];
+  bookmarkedSlugs: string[];
 }) {
   const totalModules = allModules.length;
   const doneCount = completedModules.length;
   const nextModules = allModules.filter((m) => !completedModules.includes(m.slug)).slice(0, 3);
+  const keyDates = getKeyDates(assessment.year_level);
+  const weeklyFocus = nextModules[0];
+  const overallProgress = Math.round(((doneCount / totalModules) * 50 + (progress / 100) * 50));
+
   return (
     <div className="space-y-8">
       {/* Welcome header */}
@@ -357,6 +403,71 @@ function OverviewTab({
           Retake Assessment
         </Link>
       </div>
+
+      {/* Weekly Focus + Progress Summary */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {weeklyFocus && (
+          <Card hover={false} className="p-5 border-l-4 border-l-gold">
+            <h3 className="text-xs font-semibold text-navy/40 uppercase tracking-wider mb-3">This Week&apos;s Focus</h3>
+            <Link href={`/modules/${weeklyFocus.slug}`} className="group">
+              <p className="font-semibold text-navy group-hover:text-teal transition-colors text-sm">{weeklyFocus.title}</p>
+              <p className="text-navy/50 text-xs mt-1">{weeklyFocus.description}</p>
+              <span className="text-teal text-xs font-medium mt-2 inline-flex items-center gap-1">Start module <span>&rarr;</span></span>
+            </Link>
+          </Card>
+        )}
+        <Card hover={false} className="p-5">
+          <h3 className="text-xs font-semibold text-navy/40 uppercase tracking-wider mb-3">Overall Progress</h3>
+          <div className="flex items-end gap-3">
+            <p className="text-3xl font-bold text-teal">{overallProgress}%</p>
+            <div className="flex-1 pb-1.5">
+              <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-teal to-gold rounded-full transition-all" style={{ width: `${overallProgress}%` }} />
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-4 mt-3 text-xs text-navy/40">
+            <span>Modules: {doneCount}/{totalModules}</span>
+            <span>Assessment: ✓</span>
+          </div>
+        </Card>
+      </div>
+
+      {/* Key Dates */}
+      {keyDates.length > 0 && (
+        <div>
+          <h2 className="text-lg font-bold text-navy mb-4">Key Dates</h2>
+          <div className="space-y-2">
+            {keyDates.map((d) => (
+              <div key={d.label} className={`flex items-center justify-between p-3 rounded-xl border ${d.urgent ? "border-coral/20 bg-coral-50/30" : "border-gray-100 bg-white"}`}>
+                <span className={`text-sm font-medium ${d.urgent ? "text-coral" : "text-navy"}`}>{d.label}</span>
+                <span className={`text-xs font-medium ${d.urgent ? "text-coral" : "text-navy/40"}`}>
+                  {d.daysAway <= 0 ? "Now" : `in ${d.daysAway} days`}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Saved Guides */}
+      {bookmarkedSlugs.length > 0 && (
+        <div>
+          <h2 className="text-lg font-bold text-navy mb-4">Your Saved Guides</h2>
+          <div className="space-y-2">
+            {bookmarkedSlugs.map((slug) => {
+              const g = guideMeta[slug];
+              if (!g) return null;
+              return (
+                <Link key={slug} href={`/guides/${slug}`} className="group flex items-center justify-between p-3 bg-white rounded-xl border border-gray-100 hover:border-teal/30 transition-all">
+                  <span className="text-sm font-medium text-navy group-hover:text-teal transition-colors">{g.title}</span>
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-navy/20 flex-shrink-0"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Position Card */}
       <Card accent hover={false} className="p-6">
@@ -385,6 +496,11 @@ function OverviewTab({
             </div>
           </div>
         </div>
+        {assessment.qualification_pathway === "ncea" && (
+          <p className="mt-4 pt-3 border-t border-gray-100 text-xs text-amber-700 bg-amber-50 -mx-6 -mb-6 px-6 py-3 rounded-b-xl">
+            ℹ️ Your pathway is based on current NCEA requirements, which apply to students graduating by 2029.
+          </p>
+        )}
       </Card>
 
       {/* Pathway Roadmap (compact) */}

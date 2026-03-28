@@ -52,11 +52,20 @@ export function getAllGuides(): Guide[] {
 
 // Static ordered list for navigation order
 const guideOrder = [
+  "nz-qualification-changes",
   "understanding-nz-schools",
+  "understanding-ncea-credits",
   "ncea-vs-cambridge-vs-ib",
+  "subject-selection-strategy",
+  "preparing-for-exams",
+  "what-to-do-if-behind",
   "how-to-get-into-university",
-  "your-rights-and-support",
   "scholarship-guide",
+  "studylink-complete-guide",
+  "university-open-days",
+  "your-rights-and-support",
+  "first-gen-experience",
+  "guide-for-parents",
 ];
 
 export const guides: Guide[] = (() => {

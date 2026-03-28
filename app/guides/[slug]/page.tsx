@@ -6,6 +6,7 @@ import Container from "@/components/Container";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import ReadingProgress from "@/components/ReadingProgress";
+import QualificationChangeNotice from "@/components/QualificationChangeNotice";
 import {
   guides,
   getGuideBySlug,
@@ -32,6 +33,7 @@ const categoryColors: Record<string, string> = {
   "Understanding the System": "bg-teal-50 text-teal-700",
   "Choosing Your Path": "bg-gold-50 text-gold-800",
   "Applying to University": "bg-coral-50 text-coral-700",
+  "For Parents & Families": "bg-navy-50 text-navy-600",
 };
 
 const guideToModule: Record<string, { slug: string; title: string }> = {
@@ -40,6 +42,11 @@ const guideToModule: Record<string, { slug: string; title: string }> = {
   "how-to-get-into-university": { slug: "check-your-ue-progress", title: "Check Your UE Progress" },
   "your-rights-and-support": { slug: "get-set-up-at-school", title: "Get Set Up at Your School" },
   "scholarship-guide": { slug: "apply-for-funding", title: "Apply for Funding" },
+  "subject-selection-strategy": { slug: "plan-your-subject-choices", title: "Plan Your Subject Choices" },
+  "understanding-ncea-credits": { slug: "track-your-ncea-credits", title: "Track Your NCEA Credits" },
+  "preparing-for-exams": { slug: "prepare-for-exam-season", title: "Prepare for Exam Season" },
+  "university-open-days": { slug: "attend-a-university-open-day", title: "Attend a University Open Day" },
+  "studylink-complete-guide": { slug: "set-up-studylink", title: "Set Up StudyLink" },
 };
 
 const guideImages: Record<string, { src: string; alt: string }> = {
@@ -48,6 +55,15 @@ const guideImages: Record<string, { src: string; alt: string }> = {
   "how-to-get-into-university": { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80", alt: "University graduation ceremony" },
   "your-rights-and-support": { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&q=80", alt: "Diverse students in a supportive classroom" },
   "scholarship-guide": { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80", alt: "Financial documents and scholarship papers" },
+  "nz-qualification-changes": { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80", alt: "Students in a classroom" },
+  "subject-selection-strategy": { src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80", alt: "Student planning subjects" },
+  "understanding-ncea-credits": { src: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80", alt: "Student studying with books" },
+  "what-to-do-if-behind": { src: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&q=80", alt: "Student working through challenges" },
+  "preparing-for-exams": { src: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=1200&q=80", alt: "Student preparing for exams" },
+  "first-gen-experience": { src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1200&q=80", alt: "Diverse group of students" },
+  "guide-for-parents": { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&q=80", alt: "Family and students" },
+  "studylink-complete-guide": { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80", alt: "Financial documents" },
+  "university-open-days": { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80", alt: "University campus visit" },
 };
 
 export default async function GuidePage({ params }: Props) {
@@ -156,6 +172,31 @@ export default async function GuidePage({ params }: Props) {
 
             {/* Main content */}
             <div className="flex-1 min-w-0 max-w-3xl order-1 lg:order-2">
+              {/* Qualification change warnings for specific guides */}
+              {params.slug === "ncea-vs-cambridge-vs-ib" && (
+                <QualificationChangeNotice variant="prominent">
+                  <p className="font-semibold">Major qualification changes ahead</p>
+                  <p>The NZ Government confirmed in March 2026 that NCEA will be replaced:</p>
+                  <ul className="list-disc pl-4 space-y-1 mt-2">
+                    <li><strong>2028:</strong> NCEA Level 1 removed. Year 11 gets a new Foundational Award.</li>
+                    <li><strong>2029:</strong> NZ Certificate of Education (NZCE) replaces NCEA Level 2.</li>
+                    <li><strong>2030:</strong> NZ Advanced Certificate of Education (NZACE) replaces NCEA Level 3.</li>
+                    <li>A-E grades replace Achieved/Merit/Excellence.</li>
+                  </ul>
+                  <p className="mt-2"><strong>If you&apos;re in Year 9-13 right now, current NCEA rules still apply to you.</strong> The guide below covers the current system.</p>
+                </QualificationChangeNotice>
+              )}
+              {params.slug === "understanding-ncea-credits" && (
+                <QualificationChangeNotice variant="inline">
+                  <p>This guide covers NCEA credits as they work today. The credit-based system will be phased out 2028-2030. If you&apos;re currently in Year 10-13, this information applies to your studies.</p>
+                </QualificationChangeNotice>
+              )}
+              {params.slug === "what-to-do-if-behind" && (
+                <QualificationChangeNotice variant="inline" guideLink={false}>
+                  <p>This guide is based on current NCEA requirements. If you&apos;re graduating before 2030, this information applies to you.</p>
+                </QualificationChangeNotice>
+              )}
+
               <article className="guide-content" dangerouslySetInnerHTML={{ __html: guide.contentHtml }} />
 
               <div className="mt-16 p-8 bg-soft rounded-2xl text-center">

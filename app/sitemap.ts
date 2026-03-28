@@ -4,11 +4,20 @@ const BASE_URL = "https://navigatenz.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const guides = [
+    "nz-qualification-changes",
     "understanding-nz-schools",
+    "understanding-ncea-credits",
     "ncea-vs-cambridge-vs-ib",
+    "subject-selection-strategy",
+    "preparing-for-exams",
+    "what-to-do-if-behind",
     "how-to-get-into-university",
-    "your-rights-and-support",
     "scholarship-guide",
+    "studylink-complete-guide",
+    "university-open-days",
+    "your-rights-and-support",
+    "first-gen-experience",
+    "guide-for-parents",
   ];
 
   const modules = [
@@ -18,6 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "research-your-university-options",
     "complete-your-application",
     "apply-for-funding",
+    "plan-your-subject-choices",
+    "track-your-ncea-credits",
+    "prepare-for-exam-season",
+    "attend-a-university-open-day",
+    "set-up-studylink",
+    "write-your-personal-statement",
   ];
 
   return [

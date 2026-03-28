@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedStat from "@/components/AnimatedStat";
+import QualificationChangeNotice from "@/components/QualificationChangeNotice";
 import Link from "next/link";
 
 const features = [
@@ -90,6 +91,11 @@ const steps = [
 export default function Home() {
   return (
     <>
+      <QualificationChangeNotice variant="banner">
+        NZ&apos;s school qualifications are changing. NCEA will be phased out between 2028-2030. Our guides cover the current system for students graduating before 2030.{" "}
+        <Link href="/guides/nz-qualification-changes" className="underline font-semibold">Learn more</Link>
+      </QualificationChangeNotice>
+
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-teal-50/40 via-soft to-gold-50/30" />

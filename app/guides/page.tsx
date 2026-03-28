@@ -6,26 +6,38 @@ import Link from "next/link";
 import Container from "@/components/Container";
 import Card from "@/components/Card";
 import ScrollReveal from "@/components/ScrollReveal";
+import QualificationChangeNotice from "@/components/QualificationChangeNotice";
 
 const categories = [
   "All",
   "Understanding the System",
   "Choosing Your Path",
   "Applying to University",
+  "For Parents & Families",
 ] as const;
 
 const guidesData = [
+  { slug: "nz-qualification-changes", title: "NZ Qualification Changes: What You Need to Know", description: "NCEA is being replaced from 2028-2030. Here's what's changing.", category: "Understanding the System", readTime: "7 min read", image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80", imageAlt: "Students in a classroom", badge: "NEW" },
   { slug: "understanding-nz-schools", title: "Understanding NZ Schools", description: "How year levels, school types, zoning, and enrolment work", category: "Understanding the System", readTime: "8 min read", image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=80", imageAlt: "New Zealand school building" },
+  { slug: "understanding-ncea-credits", title: "Understanding NCEA Credits", description: "Credits, endorsements, and UE requirements — the plain-English version", category: "Understanding the System", readTime: "10 min read", image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&q=80", imageAlt: "Student studying with books" },
   { slug: "ncea-vs-cambridge-vs-ib", title: "NCEA vs Cambridge vs IB", description: "A plain-language comparison of NZ's three main qualification pathways", category: "Choosing Your Path", readTime: "10 min read", image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&q=80", imageAlt: "Student studying with open books" },
-  { slug: "how-to-get-into-university", title: "How to Get Into a NZ University", description: "University Entrance, applications, key dates, and scholarships explained", category: "Applying to University", readTime: "12 min read", image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&q=80", imageAlt: "University graduation ceremony" },
+  { slug: "subject-selection-strategy", title: "Subject Selection Strategy", description: "How to choose your subjects wisely — and avoid common mistakes", category: "Choosing Your Path", readTime: "8 min read", image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&q=80", imageAlt: "Student planning subjects" },
+  { slug: "preparing-for-exams", title: "Preparing for Exams", description: "What actually works when preparing for NCEA or Cambridge exams", category: "Choosing Your Path", readTime: "9 min read", image: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=400&q=80", imageAlt: "Student preparing for exams" },
+  { slug: "what-to-do-if-behind", title: "What to Do If You're Behind", description: "Missed credits or low grades? Don't panic — here are your options", category: "Understanding the System", readTime: "7 min read", image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=400&q=80", imageAlt: "Student working through challenges" },
+  { slug: "how-to-get-into-university", title: "How to Get Into a NZ University", description: "University Entrance, applications, key dates, and scholarships", category: "Applying to University", readTime: "12 min read", image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&q=80", imageAlt: "University graduation ceremony" },
+  { slug: "scholarship-guide", title: "Scholarship Guide", description: "How to find and apply for scholarships in NZ", category: "Applying to University", readTime: "7 min read", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80", imageAlt: "Scholarship application documents" },
+  { slug: "studylink-complete-guide", title: "StudyLink Complete Guide", description: "Student loans, allowances, and how to apply — the full walkthrough", category: "Applying to University", readTime: "9 min read", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80", imageAlt: "Financial documents" },
+  { slug: "university-open-days", title: "Making the Most of University Open Days", description: "How to make open days count — what to ask and what to look for", category: "Applying to University", readTime: "5 min read", image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&q=80", imageAlt: "University campus visit" },
   { slug: "your-rights-and-support", title: "Your Rights and Support", description: "ESOL support, financial help, and what schools must provide", category: "Understanding the System", readTime: "6 min read", image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&q=80", imageAlt: "Diverse students in a supportive classroom" },
-  { slug: "scholarship-guide", title: "Scholarship Guide", description: "How to find and apply for scholarships in NZ", category: "Applying to University", readTime: "7 min read", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80", imageAlt: "Financial documents and scholarship papers" },
+  { slug: "first-gen-experience", title: "The First-Gen Experience", description: "What it's like being first in your family — and why you belong", category: "For Parents & Families", readTime: "6 min read", image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=400&q=80", imageAlt: "Diverse group of students" },
+  { slug: "guide-for-parents", title: "A Guide for Parents and Families", description: "Everything parents need to know to support their child", category: "For Parents & Families", readTime: "8 min read", image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&q=80", imageAlt: "Family and students" },
 ];
 
 const categoryColors: Record<string, string> = {
   "Understanding the System": "bg-teal-50 text-teal-700",
   "Choosing Your Path": "bg-gold-50 text-gold-800",
   "Applying to University": "bg-coral-50 text-coral-700",
+  "For Parents & Families": "bg-navy-50 text-navy-600",
 };
 
 const categoryStripe: Record<string, string> = {
@@ -50,6 +62,10 @@ export default function GuidesPage() {
 
       <section className="py-12 sm:py-16">
         <Container>
+          <QualificationChangeNotice variant="inline">
+            <p>NZ&apos;s qualification system is changing. The information in these guides applies to students currently in Years 10-13 (graduating by 2029). We&apos;ll update as details are confirmed.</p>
+          </QualificationChangeNotice>
+
           <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 mb-10 -mx-4 px-4 sm:mx-0 sm:px-0">
             {categories.map((cat) => (
               <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat ? "bg-teal text-white shadow-sm shadow-teal/20" : "bg-gray-100 text-navy/60 hover:bg-gray-200 hover:text-navy"}`}>
@@ -64,7 +80,7 @@ export default function GuidesPage() {
                 <Link href={`/guides/${guide.slug}`} className="group block h-full">
                   <Card className="h-full flex flex-col overflow-hidden p-0" accent={false}>
                     {/* Header image */}
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden relative">
                       <Image
                         src={guide.image}
                         alt={guide.imageAlt}
@@ -72,6 +88,11 @@ export default function GuidesPage() {
                         height={200}
                         className="w-full h-[160px] object-cover transition-transform duration-500 group-hover:scale-105"
                       />
+                      {(guide as typeof guide & { badge?: string }).badge && (
+                        <span className="absolute top-3 right-3 bg-coral text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                          {(guide as typeof guide & { badge?: string }).badge}
+                        </span>
+                      )}
                     </div>
                     {/* Colored strip */}
                     <div className={`h-1 bg-gradient-to-r ${categoryStripe[guide.category] || "from-teal to-teal-400"}`} />

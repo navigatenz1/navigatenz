@@ -19,7 +19,7 @@ const yearOptions = [
 ];
 
 const qualOptions = [
-  { value: "ncea", label: "NCEA", sub: "New Zealand's national qualification" },
+  { value: "ncea", label: "NCEA", sub: "NZ's national qualification (being replaced 2028-2030 — current rules still apply to you)" },
   { value: "cambridge", label: "Cambridge (CIE)", sub: "British-based international qualification" },
   { value: "ib", label: "IB", sub: "International Baccalaureate Diploma" },
   { value: "not-sure", label: "I'm not sure", sub: "We'll help you figure it out" },
