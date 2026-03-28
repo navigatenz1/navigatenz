@@ -17,6 +17,7 @@ import {
   type Milestone,
 } from "@/lib/pathway";
 import { modules as allModules } from "@/lib/modules";
+import { universities as allUnis } from "@/lib/universities";
 
 /* Guide metadata for recommendations */
 const guideMeta: Record<string, { title: string; description: string; readTime: string; category: string }> = {
@@ -50,6 +51,7 @@ const tabs = [
   { id: "overview", label: "Overview", icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" },
   { id: "pathway", label: "My Pathway", icon: "M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" },
   { id: "modules", label: "Modules", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+  { id: "universities", label: "Universities", icon: "M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342" },
   { id: "tools", label: "Tools", icon: "M11.42 15.17l-5.658-5.66a2.25 2.25 0 010-3.182l.44-.439a2.25 2.25 0 013.182 0l5.657 5.657a2.25 2.25 0 010 3.182l-.44.44a2.25 2.25 0 01-3.181 0z M21.75 12a9.75 9.75 0 11-19.5 0 9.75 9.75 0 0119.5 0z" },
   { id: "guides", label: "Guides for You", icon: "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" },
   { id: "settings", label: "Settings", icon: "M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z M15 12a3 3 0 11-6 0 3 3 0 016 0z" },
@@ -162,7 +164,7 @@ export default function DashboardPage() {
 
       <div className="flex">
         {/* Desktop sidebar */}
-        <aside className="hidden lg:flex flex-col w-64 bg-navy min-h-[calc(100vh-4rem)] sticky top-16 flex-shrink-0">
+        <aside className="hidden lg:flex flex-col w-64 sidebar-gradient min-h-[calc(100vh-4rem)] sticky top-16 flex-shrink-0">
           <div className="p-6 border-b border-white/10">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center text-white text-sm font-bold">
@@ -234,6 +236,9 @@ export default function DashboardPage() {
               )}
               {tab === "modules" && (
                 <ModulesTab completedModules={completedModules} />
+              )}
+              {tab === "universities" && (
+                <UniversitiesTab preferredUnis={assessment?.preferred_universities || []} />
               )}
               {tab === "tools" && <ToolsTab />}
               {tab === "settings" && (
@@ -699,6 +704,59 @@ const dashboardTools = [
   { href: "/tools/key-dates", icon: "📅", title: "Key Dates", desc: "Never miss a deadline" },
   { href: "/tools/personal-statement", icon: "✍️", title: "Personal Statement", desc: "Write your statement step by step" },
 ];
+
+/* ── Universities Tab ── */
+function UniversitiesTab({ preferredUnis }: { preferredUnis: string[] }) {
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-bold text-navy">NZ Universities</h1>
+        <p className="text-navy/50 mt-1 text-sm">All 8 NZ universities at a glance</p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {allUnis.map((uni) => {
+          const isPref = preferredUnis.includes(uni.name);
+          return (
+            <Card key={uni.name} hover={false} className={`p-0 overflow-hidden ${isPref ? "border-l-4 border-l-gold" : ""}`}>
+              <div className="h-32 bg-gray-100 relative overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={uni.image} alt={`${uni.city} cityscape`} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+                <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                  <span className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[10px] font-bold" style={{ backgroundColor: uni.color }}>{uni.abbr.slice(0,3)}</span>
+                  <span className="text-white font-bold text-sm drop-shadow">{uni.name}</span>
+                </div>
+                {isPref && <span className="absolute top-3 right-3 bg-gold text-white text-[9px] font-bold px-2 py-0.5 rounded-full">Your pick</span>}
+              </div>
+              <div className="p-4 space-y-2">
+                <div className="flex items-center gap-2 text-xs text-navy/50">
+                  <span>{uni.city}</span>
+                  <span>·</span>
+                  <span>{uni.students} students</span>
+                  <span>·</span>
+                  <span>{uni.livingCost}</span>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {uni.knownFor.map((tag) => (
+                    <span key={tag} className="text-[10px] bg-teal-50 text-teal-700 px-2 py-0.5 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="text-[10px] text-navy/40">{uni.ranking}</p>
+                <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
+                  <a href={uni.website} target="_blank" rel="noopener noreferrer" className="text-teal text-xs font-medium hover:text-teal-600 transition-colors">Visit website &rarr;</a>
+                  <Link href={`/tools/credit-calculator`} className="text-xs text-navy/40 hover:text-navy transition-colors">Check requirements &rarr;</Link>
+                </div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+      <div className="text-center pt-4">
+        <Button href="/tools/university-matcher" variant="outline" size="sm">Not sure which? Try the University Matcher</Button>
+      </div>
+    </div>
+  );
+}
 
 function ToolsTab() {
   return (
