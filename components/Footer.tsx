@@ -6,17 +6,18 @@ import { useI18n } from "@/lib/i18n";
 
 const footerLinks = {
   Platform: [
-    { href: "/", label: "Home" },
     { href: "/guides", label: "Guides" },
     { href: "/modules", label: "Modules" },
+    { href: "/tools", label: "Tools" },
     { href: "/assessment", label: "Assessment" },
-    { href: "/tools/university-matcher", label: "University Matcher" },
+    { href: "/impact", label: "Impact" },
   ],
-  Resources: [
-    { href: "/guides/nz-qualification-changes", label: "NCEA Changes" },
-    { href: "/guides/how-to-get-into-university", label: "University Entry" },
-    { href: "/guides/scholarship-guide", label: "Scholarships" },
-    { href: "/guides/guide-for-parents", label: "For Parents" },
+  Tools: [
+    { href: "/tools/university-matcher", label: "University Matcher" },
+    { href: "/tools/credit-calculator", label: "Credit Calculator" },
+    { href: "/tools/scholarship-finder", label: "Scholarship Finder" },
+    { href: "/tools/key-dates", label: "Key Dates" },
+    { href: "/tools/personal-statement", label: "Personal Statement" },
   ],
   Connect: [
     { href: "mailto:hello@navigatenz.org", label: "Email Us" },

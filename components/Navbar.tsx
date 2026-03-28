@@ -23,9 +23,8 @@ export default function Navbar() {
     { href: "/", label: t.nav.home },
     { href: "/guides", label: t.nav.guides },
     { href: "/modules", label: t.nav.modules },
-    { href: "/tools/university-matcher", label: t.nav.uniMatcher },
+    { href: "/tools", label: t.nav.tools },
     { href: "/about", label: t.nav.about },
-    { href: "/impact", label: "Impact" },
   ];
 
   useEffect(() => {

@@ -42,7 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/assessment`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/impact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/tools`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/tools/university-matcher`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/tools/credit-calculator`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/tools/scholarship-finder`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/tools/key-dates`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/tools/personal-statement`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     ...guides.map((slug) => ({
       url: `${BASE_URL}/guides/${slug}`,
       lastModified: new Date(),
