@@ -7,11 +7,13 @@ import Logo from "./Logo";
 import Button from "./Button";
 import Container from "./Container";
 import { useAuth } from "@/lib/auth-context";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/guides", label: "Guides" },
   { href: "/modules", label: "Modules" },
+  { href: "/tools/university-matcher", label: "Uni Matcher" },
   { href: "/about", label: "About" },
 ];
 
@@ -84,6 +86,8 @@ export default function Navbar() {
                 </Link>
               );
             })}
+
+            <LanguageSwitcher />
 
             {loading ? (
               <div className="w-20 h-9 bg-gray-100 rounded-xl animate-pulse" />

@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "home": "Home",
+    "guides": "Guides",
+    "modules": "Modules",
+    "about": "About",
+    "dashboard": "Dashboard",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "freeGuides": "Free Guides",
+    "settings": "Settings",
+    "tools": "Tools",
+    "uniMatcher": "University Matcher"
+  },
+  "hero": {
+    "badge": "100% Free · Community Built · Open to Everyone",
+    "headline": "The free guide your family deserves",
+    "subheadline": "No fees. No catches. Just clear, honest guidance for students and families navigating New Zealand's education system.",
+    "cta1": "Explore Free Guides",
+    "cta2": "Find Out Where You Stand"
+  },
+  "features": {
+    "heading": "Built by students, for students",
+    "understand": "Understand the System",
+    "understandDesc": "School jargon decoded — year levels, NCEA, zoning, and more explained like a friend would",
+    "findPath": "Find Your Path",
+    "findPathDesc": "Answer a few questions and see exactly where you stand — no sign-up pressure, no sales pitch",
+    "trackProgress": "Track Your Progress",
+    "trackProgressDesc": "Free step-by-step modules you can work through at your own pace"
+  },
+  "testimonials": {
+    "heading": "From our community",
+    "subtitle": "Navigate NZ is built by first-gen students who've been where you are"
+  },
+  "stats": {
+    "free": "Always free for every family",
+    "guides": "Plain-language guides and growing",
+    "independent": "Independent — no ads, no sponsors"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "back": "Back",
+    "next": "Next",
+    "complete": "Complete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "readGuide": "Read guide",
+    "startModule": "Start module",
+    "readTime": "min read",
+    "completed": "Completed",
+    "comingSoon": "Coming Soon"
+  },
+  "assessment": {
+    "heading": "See where you stand",
+    "subtitle": "Answer a few quick questions — completely free, completely private.",
+    "letsGo": "Let's Go",
+    "complete": "Complete Assessment"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "subtitle": "Your personal overview — free forever, no strings attached",
+    "overview": "Overview",
+    "myPathway": "My Pathway",
+    "guidesForYou": "Guides for You",
+    "settings": "Settings"
+  },
+  "footer": {
+    "nonprofit": "Navigate NZ is a registered nonprofit. We will never charge for access, sell your data, or accept advertising.",
+    "tagline": "A community project built with aroha in Aotearoa"
+  },
+  "language": {
+    "current": "English",
+    "switchNote": "Translations are AI-assisted. Help us improve them."
+  }
+}

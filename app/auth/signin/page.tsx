@@ -29,7 +29,7 @@ export default function SignInPage() {
     if (error) {
       setError(error);
     } else {
-      router.push("/");
+      router.push("/dashboard");
     }
   };
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { AuthProvider } from "@/lib/auth-context";
+import { I18nProvider } from "@/lib/i18n";
 import ScrollToTop from "@/components/ScrollToTop";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -51,13 +52,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${plusJakarta.variable} font-sans antialiased`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      </head>
+      <body className={`${plusJakarta.variable} font-sans antialiased overflow-x-hidden`}>
+        <I18nProvider>
         <AuthProvider>
           <ScrollToTop />
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
         </AuthProvider>
+        </I18nProvider>
       </body>
     </html>
   );

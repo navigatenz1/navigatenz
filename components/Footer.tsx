@@ -5,14 +5,15 @@ const footerLinks = {
   Platform: [
     { href: "/", label: "Home" },
     { href: "/guides", label: "Guides" },
+    { href: "/modules", label: "Modules" },
     { href: "/assessment", label: "Assessment" },
-    { href: "/about", label: "About" },
+    { href: "/tools/university-matcher", label: "University Matcher" },
   ],
   Resources: [
-    { href: "/guides/understanding-nz-schools", label: "NZ Schools" },
-    { href: "/guides/ncea-vs-cambridge-vs-ib", label: "NCEA vs Cambridge" },
+    { href: "/guides/nz-qualification-changes", label: "NCEA Changes" },
     { href: "/guides/how-to-get-into-university", label: "University Entry" },
     { href: "/guides/scholarship-guide", label: "Scholarships" },
+    { href: "/guides/guide-for-parents", label: "For Parents" },
   ],
   Connect: [
     { href: "mailto:hello@navigatenz.org", label: "Email Us" },
@@ -20,9 +21,10 @@ const footerLinks = {
     { href: "#", label: "TikTok" },
     { href: "#", label: "Facebook" },
   ],
-  Legal: [
+  About: [
+    { href: "/about", label: "Our Story" },
+    { href: "/impact", label: "Our Impact" },
     { href: "#", label: "Privacy Policy" },
-    { href: "#", label: "Terms of Use" },
     { href: "#", label: "Accessibility" },
   ],
 };

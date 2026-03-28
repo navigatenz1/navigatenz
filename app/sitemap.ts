@@ -41,6 +41,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/modules`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/assessment`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/impact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/tools/university-matcher`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     ...guides.map((slug) => ({
       url: `${BASE_URL}/guides/${slug}`,
       lastModified: new Date(),
