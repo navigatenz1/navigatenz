@@ -7,10 +7,12 @@ import Card from "@/components/Card";
 import ScrollReveal from "@/components/ScrollReveal";
 import { modules, moduleCategories } from "@/lib/modules";
 import { useAuth } from "@/lib/auth-context";
+import { useI18n } from "@/lib/i18n";
 import { createClient } from "@/lib/supabase/client";
 
 export default function ModulesPage() {
   const { user } = useAuth();
+  const { t } = useI18n();
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -36,9 +38,9 @@ export default function ModulesPage() {
           <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
             100% Free · Self-Paced
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Free Action Modules</h1>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">{t.modulesPage.title}</h1>
           <p className="mt-4 text-white/60 text-lg leading-relaxed max-w-2xl">
-            Practical steps to keep you on track. Check off each action as you complete it.
+            {t.modulesPage.subtitle}
           </p>
           {user && (
             <div className="mt-6 flex items-center gap-3">

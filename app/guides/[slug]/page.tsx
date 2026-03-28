@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import ReadingProgress from "@/components/ReadingProgress";
 import QualificationChangeNotice from "@/components/QualificationChangeNotice";
+import GuideBanner from "@/components/GuideBanner";
 import {
   guides,
   getGuideBySlug,
@@ -120,14 +121,7 @@ export default async function GuidePage({ params }: Props) {
         </Container>
       </section>
 
-      {/* Free guide banner */}
-      <div className="bg-teal-50 border-b border-teal-100">
-        <Container className="py-2.5">
-          <p className="text-center text-teal-700 text-xs font-medium">
-            📚 Free guide · No account required · Share with anyone
-          </p>
-        </Container>
-      </div>
+      <GuideBanner />
 
       <section className="py-12 sm:py-16">
         <Container>

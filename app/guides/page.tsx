@@ -7,6 +7,7 @@ import Container from "@/components/Container";
 import Card from "@/components/Card";
 import ScrollReveal from "@/components/ScrollReveal";
 import QualificationChangeNotice from "@/components/QualificationChangeNotice";
+import { useI18n } from "@/lib/i18n";
 
 const categories = [
   "All",
@@ -47,6 +48,7 @@ const categoryStripe: Record<string, string> = {
 };
 
 export default function GuidesPage() {
+  const { t } = useI18n();
   const [activeCategory, setActiveCategory] = useState("All");
   const filtered = activeCategory === "All" ? guidesData : guidesData.filter((g) => g.category === activeCategory);
 
@@ -55,8 +57,8 @@ export default function GuidesPage() {
       <section className="relative bg-gradient-to-br from-navy via-navy to-teal-900 py-16 sm:py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, white 0.5px, transparent 0.5px)", backgroundSize: "20px 20px" }} />
         <Container className="relative">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Free Guides</h1>
-          <p className="mt-4 text-white/60 text-lg leading-relaxed max-w-xl">In-depth articles explaining how NZ&apos;s education system works. Read them anytime — no account needed.</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">{t.guidesPage.title}</h1>
+          <p className="mt-4 text-white/60 text-lg leading-relaxed max-w-xl">{t.guidesPage.subtitle}</p>
         </Container>
       </section>
 

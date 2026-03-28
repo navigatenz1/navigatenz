@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
@@ -5,6 +7,7 @@ import Card from "@/components/Card";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedStat from "@/components/AnimatedStat";
 import QualificationChangeNotice from "@/components/QualificationChangeNotice";
+import { useI18n } from "@/lib/i18n";
 import Link from "next/link";
 
 const features = [
@@ -89,6 +92,7 @@ const steps = [
 ];
 
 export default function Home() {
+  const { t } = useI18n();
   return (
     <>
       <QualificationChangeNotice variant="banner">
@@ -105,18 +109,18 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 bg-teal-50 text-teal-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 animate-fade-in-up">
-                100% Free · Community Built · Open to Everyone
+                {t.hero.badge}
               </div>
               <h1 className="text-[2.75rem] sm:text-[3.25rem] lg:text-[3.5rem] font-bold text-navy leading-[1.1] tracking-tight animate-fade-in-up">
-                The free guide your{" "}
-                <span className="text-teal">family deserves</span>
+                {t.hero.headline1}{" "}
+                <span className="text-teal">{t.hero.headline2}</span>
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-navy/60 leading-relaxed max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-200">
-                No fees. No catches. Just clear, honest guidance for students and families navigating New Zealand&apos;s education system.
+                {t.hero.subheadline}
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-400">
-                <Button href="/guides" size="lg">Explore Free Guides</Button>
-                <Button href="/assessment" variant="outline" size="lg">Find Out Where You Stand</Button>
+                <Button href="/guides" size="lg">{t.hero.cta1}</Button>
+                <Button href="/assessment" variant="outline" size="lg">{t.hero.cta2}</Button>
               </div>
             </div>
 
@@ -171,8 +175,8 @@ export default function Home() {
         <Container className="relative">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-navy">Built by students, for students</h2>
-              <p className="mt-4 text-navy/60 max-w-xl mx-auto leading-relaxed">Navigate NZ breaks down the confusing parts of the education system into simple, actionable steps.</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-navy">{t.features.heading}</h2>
+              <p className="mt-4 text-navy/60 max-w-xl mx-auto leading-relaxed">{t.features.subtitle}</p>
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -208,8 +212,8 @@ export default function Home() {
         <Container className="relative">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <h2 className="text-3xl sm:text-4xl font-bold text-navy">From our community</h2>
-              <p className="mt-4 text-navy/60">Navigate NZ is built by first-gen students who&apos;ve been where you are</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-navy">{t.testimonials.heading}</h2>
+              <p className="mt-4 text-navy/60">{t.testimonials.subtitle}</p>
             </div>
           </ScrollReveal>
           <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4 snap-x snap-mandatory">
@@ -242,8 +246,8 @@ export default function Home() {
         <Container className="relative">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <h2 className="text-3xl sm:text-4xl font-bold text-navy">How we help — for free, forever</h2>
-              <p className="mt-4 text-navy/60 max-w-xl mx-auto">From understanding the basics to tracking your journey — we&apos;ve got every step covered.</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-navy">{t.helpSection.heading}</h2>
+              <p className="mt-4 text-navy/60 max-w-xl mx-auto">{t.helpSection.subtitle}</p>
             </div>
           </ScrollReveal>
           <div className="space-y-20 lg:space-y-28">
@@ -282,8 +286,8 @@ export default function Home() {
           <ScrollReveal>
             <div className="max-w-2xl mx-auto">
               <Card hover={false} className="p-10 sm:p-14 text-center border-0 shadow-xl shadow-gray-200/60 bg-white">
-                <h2 className="text-2xl sm:text-3xl font-bold text-navy mb-3">Not sure where to start?</h2>
-                <p className="text-navy/60 mb-10">Choose your role and we&apos;ll point you in the right direction</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-navy mb-3">{t.quickStart.heading}</h2>
+                <p className="text-navy/60 mb-10">{t.quickStart.subtitle}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Link href="/guides" className="group flex flex-col items-center gap-4 p-8 rounded-2xl border-2 border-gray-100 hover:border-teal hover:bg-teal-50/50 transition-all duration-200 hover:scale-[1.02]">
                     <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors">
@@ -325,8 +329,8 @@ export default function Home() {
         <Container className="relative">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-navy">How it works</h2>
-              <p className="mt-4 text-navy/60 max-w-xl mx-auto">Three simple steps to your personalised university pathway</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-navy">{t.howItWorks.heading}</h2>
+              <p className="mt-4 text-navy/60 max-w-xl mx-auto">{t.howItWorks.subtitle}</p>
             </div>
           </ScrollReveal>
           <ScrollReveal>
@@ -349,9 +353,9 @@ export default function Home() {
         <Container>
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-bold text-navy">Ready to get started?</h2>
-              <p className="mt-4 text-navy/60 text-lg">It&apos;s free, it&apos;s simple, and it&apos;s built for students just like you.</p>
-              <div className="mt-10"><Button href="/guides" size="lg">Explore the Guides</Button></div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-navy">{t.cta.heading}</h2>
+              <p className="mt-4 text-navy/60 text-lg">{t.cta.subtitle}</p>
+              <div className="mt-10"><Button href="/guides" size="lg">{t.cta.button}</Button></div>
             </div>
           </ScrollReveal>
         </Container>

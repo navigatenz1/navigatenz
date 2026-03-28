@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Container from "./Container";
+import { useI18n } from "@/lib/i18n";
 
 const footerLinks = {
   Platform: [
@@ -30,6 +33,7 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="relative bg-navy text-white overflow-hidden">
       {/* Decorative shapes */}
@@ -99,7 +103,7 @@ export default function Footer() {
         {/* Nonprofit statement */}
         <div className="mt-14 pt-6 border-t border-white/10">
           <p className="text-white/40 text-xs text-center leading-relaxed max-w-2xl mx-auto">
-            Navigate NZ is a registered nonprofit. We will never charge for access, sell your data, or accept advertising.
+            {t.footer.nonprofit}
           </p>
         </div>
 
@@ -111,7 +115,7 @@ export default function Footer() {
             </p>
             <span className="hidden sm:inline text-white/20">|</span>
             <p className="text-white/30 flex items-center gap-1.5">
-              A community project built with aroha in Aotearoa 🇳🇿
+              {t.footer.tagline} 🇳🇿
               {/* Small fern icon */}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-teal-400">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c0 0-7-4-7-11 0-3 2-6 5-7 1-.3 2 0 2 0s1-.3 2 0c3 1 5 4 5 7 0 7-7 11-7 11z" />
