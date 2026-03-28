@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #1B2A4A;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Animations ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+@keyframes progress {
+  from { width: 0%; }
+}
+
+.animate-fade-in-up { animation: fade-in-up 0.7s ease-out forwards; }
+.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 3s ease-in-out infinite; }
+
+.animation-delay-200 { animation-delay: 200ms; opacity: 0; }
+.animation-delay-400 { animation-delay: 400ms; opacity: 0; }
+.animation-delay-600 { animation-delay: 600ms; opacity: 0; }
+.animation-delay-1000 { animation-delay: 1000ms; }
+.animation-delay-2000 { animation-delay: 2000ms; }
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Scrollbar hide ── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ── Sticky sidebar ── */
+.sidebar-sticky {
+  position: sticky;
+  top: 5rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+}
+
+/* ── Dot grid background pattern ── */
+.bg-dot-pattern {
+  background-image: radial-gradient(circle, #1B2A4A 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+  opacity: 0.03;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ── Guide prose styling ── */
+.guide-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgba(27, 42, 74, 0.8);
+}
+.guide-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1B2A4A;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #E6F5F3;
+}
+.guide-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1B2A4A;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.guide-content p {
+  margin-bottom: 1.25rem;
+}
+.guide-content ul,
+.guide-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  list-style: none;
+}
+.guide-content ul li,
+.guide-content ol li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.guide-content ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #2A9D8F;
+}
+.guide-content ol {
+  counter-reset: guide-counter;
+}
+.guide-content ol li {
+  counter-increment: guide-counter;
+}
+.guide-content ol li::before {
+  content: counter(guide-counter) ".";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: #2A9D8F;
+}
+.guide-content strong {
+  color: #1B2A4A;
+  font-weight: 600;
+}
+.guide-content a {
+  color: #2A9D8F;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.guide-content a:hover {
+  color: #228072;
+}
+.guide-content blockquote {
+  border-left: 4px solid #2A9D8F;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  background: #E6F5F3;
+  border-radius: 0 12px 12px 0;
+  color: #1B2A4A;
+  font-style: italic;
+}
+.guide-content hr {
+  border: none;
+  border-top: 2px solid #E6F5F3;
+  margin: 2.5rem 0;
+}
+
+/* ── Reading progress bar ── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2A9D8F, #E9C46A);
+  z-index: 100;
+  transition: width 0.1s linear;
+}
