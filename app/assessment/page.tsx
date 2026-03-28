@@ -77,7 +77,8 @@ export default function AssessmentPage() {
       .eq("user_id", user.id)
       .order("completed_at", { ascending: false })
       .limit(1)
-      .then(({ data: rows }) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then(({ data: rows }: { data: any[] | null }) => {
         if (rows && rows.length > 0) {
           setExisting({
             year_level: rows[0].year_level,

@@ -48,6 +48,7 @@ interface AssessmentRow {
 const tabs = [
   { id: "overview", label: "Overview", icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" },
   { id: "pathway", label: "My Pathway", icon: "M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" },
+  { id: "modules", label: "Modules", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
   { id: "guides", label: "Guides for You", icon: "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" },
   { id: "settings", label: "Settings", icon: "M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z M15 12a3 3 0 11-6 0 3 3 0 016 0z" },
 ];
@@ -106,10 +107,12 @@ export default function DashboardPage() {
         setProfileType(user.user_metadata?.user_type || "student");
       }
       if (modRes.data) {
-        setCompletedModules(modRes.data.map((r) => r.module_slug).filter((s: string) => !s.includes(":")));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setCompletedModules(modRes.data.map((r: any) => r.module_slug).filter((s: string) => !s.includes(":")));
       }
       if (bookRes.data) {
-        setBookmarkedSlugs(bookRes.data.map((r) => r.guide_slug));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setBookmarkedSlugs(bookRes.data.map((r: any) => r.guide_slug));
       }
       setDataLoading(false);
     });
@@ -135,7 +138,7 @@ export default function DashboardPage() {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gray-50/80">
+    <div className="min-h-screen bg-gray-50/80 overflow-x-hidden">
       {/* Mobile tabs */}
       <div className="lg:hidden border-b border-gray-200 bg-white sticky top-16 z-40">
         <div className="flex overflow-x-auto scrollbar-hide">
@@ -202,7 +205,7 @@ export default function DashboardPage() {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-10 max-w-5xl">
+        <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-10 max-w-full lg:max-w-[calc(100vw-16rem)]">
           {dataLoading ? (
             <LoadingSkeleton />
           ) : !assessment ? (
@@ -226,6 +229,9 @@ export default function DashboardPage() {
               )}
               {tab === "guides" && (
                 <GuidesTab slugs={recommendedSlugs} assessment={assessment} />
+              )}
+              {tab === "modules" && (
+                <ModulesTab completedModules={completedModules} />
               )}
               {tab === "settings" && (
                 <SettingsTab
@@ -573,6 +579,36 @@ function OverviewTab({
         )}
       </div>
 
+      {/* Quick Access */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Link href="/tools/university-matcher" className="group">
+          <Card hover={true} className="p-5 h-full">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gold-50 flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#E9C46A" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3" /></svg>
+              </div>
+              <div>
+                <p className="font-semibold text-navy text-sm group-hover:text-teal transition-colors">Find Your University Match</p>
+                <p className="text-navy/40 text-xs">5 questions, personalised results</p>
+              </div>
+            </div>
+          </Card>
+        </Link>
+        <Link href="/impact" className="group">
+          <Card hover={true} className="p-5 h-full">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2A9D8F" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+              </div>
+              <div>
+                <p className="font-semibold text-navy text-sm group-hover:text-teal transition-colors">See Our Impact</p>
+                <p className="text-navy/40 text-xs">Real numbers, real students</p>
+              </div>
+            </div>
+          </Card>
+        </Link>
+      </div>
+
       {/* Recommended Guides */}
       <div>
         <h2 className="text-lg font-bold text-navy mb-4">Recommended guides</h2>
@@ -626,6 +662,41 @@ function PathwayTab({ milestones, progress, assessment }: { milestones: Mileston
         {milestones.map((m, i) => (
           <MilestoneRow key={m.step} m={m} isLast={i === milestones.length - 1} expanded />
         ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Guides Tab ── */
+/* ── Modules Tab ── */
+function ModulesTab({ completedModules }: { completedModules: string[] }) {
+  const doneCount = completedModules.length;
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-bold text-navy">Modules</h1>
+        <p className="text-navy/50 mt-1 text-sm">
+          {doneCount}/{allModules.length} completed · Check off actions as you go
+        </p>
+      </div>
+      <div className="space-y-3">
+        {allModules.map((m) => {
+          const done = completedModules.includes(m.slug);
+          return (
+            <Link key={m.slug} href={`/modules/${m.slug}`} className="group flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-teal/30 hover:shadow-sm transition-all">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${done ? "bg-teal" : "border-2 border-gray-200"}`}>
+                  {done && <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>}
+                </div>
+                <div className="min-w-0">
+                  <p className={`text-sm font-medium truncate ${done ? "text-navy/50 line-through" : "text-navy group-hover:text-teal"} transition-colors`}>{m.title}</p>
+                  <p className="text-xs text-navy/40">{m.category} · {m.timeEstimate} · {m.checklist.length} actions</p>
+                </div>
+              </div>
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-navy/20 group-hover:text-teal flex-shrink-0 ml-2"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

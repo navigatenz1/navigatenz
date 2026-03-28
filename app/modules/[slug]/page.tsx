@@ -29,10 +29,10 @@ export default function ModulePage() {
       .select("*")
       .eq("user_id", user.id)
       .like("module_slug", `${slug}%`)
-      .then(({ data }) => {
+      .then(({ data }: { data: { module_slug: string; completed: boolean }[] | null }) => {
         if (!data) return;
         const done = new Set<string>();
-        data.forEach((row) => {
+        data.forEach((row: { module_slug: string; completed: boolean }) => {
           if (row.module_slug === slug && row.completed) setModuleCompleted(true);
           if (row.module_slug.startsWith(`${slug}:`) && row.completed) done.add(row.module_slug.split(":")[1]);
         });

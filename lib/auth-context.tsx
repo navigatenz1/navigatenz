@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
   useCallback,
+  useMemo,
 } from "react";
 import type { User, Session } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
@@ -39,25 +40,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
+  // Stable singleton — won't cause re-renders
+  const supabase = useMemo(() => createClient(), []);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    // Get initial session
+    supabase.auth.getSession().then((res: { data: { session: Session | null } }) => {
+      setSession(res.data.session);
+      setUser(res.data.session?.user ?? null);
       setLoading(false);
     });
 
+    // Listen for auth changes (login, logout, token refresh)
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    } = supabase.auth.onAuthStateChange((_event: string, newSession: Session | null) => {
+      setSession(newSession);
+      setUser(newSession?.user ?? null);
       setLoading(false);
     });
 
     return () => subscription.unsubscribe();
-  }, [supabase.auth]);
+  }, [supabase]);
 
   const signUp = useCallback(
     async (
@@ -72,7 +76,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       return { error: error?.message ?? null };
     },
-    [supabase.auth]
+    [supabase]
   );
 
   const signIn = useCallback(
@@ -83,12 +87,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       return { error: error?.message ?? null };
     },
-    [supabase.auth]
+    [supabase]
   );
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
-  }, [supabase.auth]);
+  }, [supabase]);
 
   return (
     <AuthContext.Provider

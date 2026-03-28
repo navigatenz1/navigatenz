@@ -21,8 +21,8 @@ export default function ModulesPage() {
       .select("module_slug")
       .eq("user_id", user.id)
       .eq("completed", true)
-      .then(({ data }) => {
-        if (data) setCompletedSlugs(new Set(data.map((r) => r.module_slug)));
+      .then(({ data }: { data: { module_slug: string }[] | null }) => {
+        if (data) setCompletedSlugs(new Set(data.map((r: { module_slug: string }) => r.module_slug)));
       });
   }, [user]);
 

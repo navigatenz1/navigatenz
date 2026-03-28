@@ -7,15 +7,8 @@ import Logo from "./Logo";
 import Button from "./Button";
 import Container from "./Container";
 import { useAuth } from "@/lib/auth-context";
+import { useI18n } from "@/lib/i18n";
 import LanguageSwitcher from "./LanguageSwitcher";
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/guides", label: "Guides" },
-  { href: "/modules", label: "Modules" },
-  { href: "/tools/university-matcher", label: "Uni Matcher" },
-  { href: "/about", label: "About" },
-];
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -24,6 +17,16 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, loading, signOut } = useAuth();
+  const { t } = useI18n();
+
+  const links = [
+    { href: "/", label: t.nav.home },
+    { href: "/guides", label: t.nav.guides },
+    { href: "/modules", label: t.nav.modules },
+    { href: "/tools/university-matcher", label: t.nav.uniMatcher },
+    { href: "/about", label: t.nav.about },
+    { href: "/impact", label: "Impact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -94,7 +97,7 @@ export default function Navbar() {
             ) : user ? (
               /* Logged in: Dashboard button + avatar dropdown */
               <div className="flex items-center gap-3">
-              <Button href="/dashboard" size="sm">Dashboard</Button>
+              <Button href="/dashboard" size="sm">{t.nav.dashboard}</Button>
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -162,10 +165,10 @@ export default function Navbar() {
                   href="/auth/signin"
                   className="text-sm font-medium text-navy/70 hover:text-navy transition-colors"
                 >
-                  Sign In
+                  {t.nav.signIn}
                 </Link>
                 <Button href="/guides" size="sm">
-                  Free Guides
+                  {t.nav.freeGuides}
                 </Button>
               </div>
             )}
