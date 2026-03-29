@@ -4,61 +4,49 @@ const BASE_URL = "https://navigatenz.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const guides = [
-    "nz-qualification-changes",
-    "understanding-nz-schools",
-    "understanding-ncea-credits",
-    "ncea-vs-cambridge-vs-ib",
-    "subject-selection-strategy",
-    "preparing-for-exams",
-    "what-to-do-if-behind",
-    "how-to-get-into-university",
-    "scholarship-guide",
-    "studylink-complete-guide",
-    "university-open-days",
-    "your-rights-and-support",
-    "first-gen-experience",
-    "guide-for-parents",
+    "nz-qualification-changes", "understanding-nz-schools", "understanding-ncea-credits",
+    "ncea-vs-cambridge-vs-ib", "subject-selection-strategy", "preparing-for-exams",
+    "what-to-do-if-behind", "how-to-get-into-university", "scholarship-guide",
+    "studylink-complete-guide", "university-open-days", "your-rights-and-support",
+    "first-gen-experience", "guide-for-parents",
   ];
 
   const modules = [
-    "get-set-up-at-school",
-    "choose-your-pathway",
-    "check-your-ue-progress",
-    "research-your-university-options",
-    "complete-your-application",
-    "apply-for-funding",
-    "plan-your-subject-choices",
-    "track-your-ncea-credits",
-    "prepare-for-exam-season",
-    "attend-a-university-open-day",
-    "set-up-studylink",
-    "write-your-personal-statement",
+    "get-set-up-at-school", "choose-your-pathway", "check-your-ue-progress",
+    "research-your-university-options", "complete-your-application", "apply-for-funding",
+    "plan-your-subject-choices", "track-your-ncea-credits", "prepare-for-exam-season",
+    "attend-a-university-open-day", "set-up-studylink", "write-your-personal-statement",
+  ];
+
+  const tools = [
+    "university-matcher", "credit-calculator", "scholarship-finder", "key-dates", "personal-statement",
   ];
 
   return [
-    { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+    { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE_URL}/guides`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/modules`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/assessment`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/impact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/tools`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/tools/university-matcher`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/tools/credit-calculator`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/tools/scholarship-finder`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/tools/key-dates`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/tools/personal-statement`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/modules`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/assessment`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/impact`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
     ...guides.map((slug) => ({
       url: `${BASE_URL}/guides/${slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
+    ...tools.map((slug) => ({
+      url: `${BASE_URL}/tools/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     ...modules.map((slug) => ({
       url: `${BASE_URL}/modules/${slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
-      priority: 0.7,
+      priority: 0.6,
     })),
   ];
 }

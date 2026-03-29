@@ -27,7 +27,18 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const guide = getGuideBySlug(params.slug);
   if (!guide) return {};
-  return { title: guide.title, description: guide.description };
+  const img = guideImages[params.slug];
+  return {
+    title: guide.title,
+    description: `${guide.description}. Free plain-language guide from Navigate NZ.`,
+    alternates: { canonical: `/guides/${params.slug}` },
+    openGraph: {
+      title: `${guide.title} — Navigate NZ`,
+      description: guide.description,
+      type: "article",
+      ...(img && { images: [{ url: img.src, alt: img.alt }] }),
+    },
+  };
 }
 
 const categoryColors: Record<string, string> = {
