@@ -164,41 +164,40 @@ export default function DashboardPage() {
 
       <div className="flex">
         {/* Desktop sidebar */}
-        <aside className="hidden lg:flex flex-col w-64 sidebar-gradient min-h-[calc(100vh-4rem)] sticky top-16 flex-shrink-0">
-          <div className="p-6 border-b border-white/10">
+        <aside className="hidden lg:flex flex-col w-64 bg-gray-50 border-r border-gray-100 min-h-[calc(100vh-4rem)] sticky top-16 flex-shrink-0">
+          <div className="p-6 border-b border-gray-200">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center text-white text-sm font-bold">
                 {firstName[0]?.toUpperCase()}
               </div>
               <div className="min-w-0">
-                <p className="text-white font-semibold text-sm truncate">{profileName || firstName}</p>
-                <p className="text-white/40 text-xs truncate">{profileEmail}</p>
+                <p className="text-navy font-semibold text-sm truncate">{profileName || firstName}</p>
+                <p className="text-gray-400 text-xs truncate">{profileEmail}</p>
               </div>
             </div>
           </div>
-          <nav className="flex-1 p-3 space-y-1">
+          <nav className="flex-1 p-3 space-y-0.5">
             {tabs.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setTab(t.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   tab === t.id
-                    ? "bg-white/10 text-white"
-                    : "text-white/50 hover:text-white/80 hover:bg-white/5"
+                    ? "bg-teal-50 text-teal"
+                    : "text-gray-500 hover:text-navy hover:bg-gray-100"
                 }`}
               >
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d={t.icon} />
                 </svg>
                 {t.label}
-                {tab === t.id && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-teal" />}
               </button>
             ))}
           </nav>
-          <div className="p-4 border-t border-white/10">
+          <div className="p-4 border-t border-gray-200">
             <button
               onClick={async () => { await signOut(); router.push("/"); }}
-              className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-white/40 hover:text-white/70 hover:bg-white/5 transition-all"
+              className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-gray-400 hover:text-coral hover:bg-red-50 transition-all"
             >
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />

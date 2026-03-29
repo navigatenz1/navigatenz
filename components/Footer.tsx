@@ -36,12 +36,8 @@ const footerLinks = {
 export default function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="relative bg-navy text-white overflow-hidden">
-      {/* Decorative shapes */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
-
-      <Container className="relative pt-20 pb-12">
+    <footer className="bg-navy text-white">
+      <Container className="pt-16 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
           {/* Brand — spans 2 cols */}
           <div className="lg:col-span-2 space-y-5">

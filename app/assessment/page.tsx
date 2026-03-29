@@ -274,7 +274,7 @@ function OptionCard({ selected, onClick, label, sub }: { selected: boolean; onCl
       onClick={onClick}
       className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-200 ${
         selected
-          ? "border-teal bg-teal-50 shadow-sm shadow-teal/10"
+          ? "border-teal bg-white shadow-sm"
           : "border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm"
       }`}
     >
@@ -371,7 +371,7 @@ function StepGrades({ data, setData, onNext }: { data: AssessmentData; setData: 
                   }}
                   className={`px-4 py-2 rounded-full text-sm font-medium border-2 transition-all ${
                     selected
-                      ? "border-teal bg-teal text-white"
+                      ? "border-teal bg-teal-50 text-teal"
                       : "border-gray-200 text-navy/60 hover:border-teal/50 hover:text-navy"
                   }`}
                 >
@@ -404,7 +404,7 @@ function StepUniversity({ selected, onToggle, onNext }: { selected: string[]; on
               onClick={() => onToggle(uni)}
               className={`p-4 rounded-2xl border-2 text-left transition-all duration-200 ${
                 isSelected
-                  ? "border-teal bg-teal-50 shadow-sm shadow-teal/10"
+                  ? "border-teal bg-white shadow-sm"
                   : "border-gray-100 bg-white hover:border-gray-200"
               }`}
             >
@@ -422,7 +422,7 @@ function StepUniversity({ selected, onToggle, onNext }: { selected: string[]; on
           onClick={() => onToggle("Not sure yet")}
           className={`p-4 rounded-2xl border-2 text-left transition-all duration-200 sm:col-span-2 ${
             selected.includes("Not sure yet")
-              ? "border-teal bg-teal-50 shadow-sm shadow-teal/10"
+              ? "border-teal bg-white shadow-sm"
               : "border-gray-100 bg-white hover:border-gray-200"
           }`}
         >

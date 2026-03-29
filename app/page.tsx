@@ -104,7 +104,6 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-soft via-white to-teal-50/20" />
-        <div className="bg-dot-pattern" />
         <Container className="relative py-16 sm:py-20 lg:py-28">
           <HeroAccordion />
         </Container>
@@ -119,7 +118,6 @@ export default function Home() {
 
       {/* Features */}
       <section className="py-16 sm:py-20 bg-white relative">
-        <div className="bg-dot-pattern" />
         <Container className="relative">
           <ScrollReveal>
             <div className="text-center mb-16">
@@ -155,7 +153,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 sm:py-32 bg-soft relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-soft relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-gold/5 rounded-full blur-3xl -translate-y-1/3" />
         <Container className="relative">
           <ScrollReveal>
@@ -190,7 +188,7 @@ export default function Home() {
       </section>
 
       {/* How Navigate NZ Helps You */}
-      <section className="py-24 sm:py-32 bg-white relative">
+      <section className="py-12 sm:py-16 bg-white relative">
         <Container className="relative">
           <ScrollReveal>
             <div className="text-center mb-20">
@@ -228,8 +226,7 @@ export default function Home() {
       </section>
 
       {/* Quick Start */}
-      <section className="py-24 sm:py-32 bg-soft relative">
-        <div className="bg-dot-pattern" />
+      <section className="py-12 sm:py-16 bg-soft relative">
         <Container className="relative">
           <ScrollReveal>
             <div className="max-w-2xl mx-auto">
@@ -259,7 +256,7 @@ export default function Home() {
       </section>
 
       {/* Stats with animated counters */}
-      <section className="py-20 sm:py-24 bg-navy relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-soft relative overflow-hidden">
         <div className="absolute top-0 left-0 w-64 h-64 bg-teal/10 rounded-full blur-3xl -translate-x-1/2" />
         <div className="absolute bottom-0 right-0 w-48 h-48 bg-gold/5 rounded-full blur-3xl translate-x-1/3" />
         <Container className="relative">
@@ -272,8 +269,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 sm:py-32 bg-soft relative">
-        <div className="bg-dot-pattern" />
+      <section className="py-12 sm:py-16 bg-soft relative">
         <Container className="relative">
           <ScrollReveal>
             <div className="text-center mb-16">
@@ -297,7 +293,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 sm:py-32 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <Container>
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto">

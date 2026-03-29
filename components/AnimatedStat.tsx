@@ -56,10 +56,10 @@ export default function AnimatedStat({
 
   return (
     <div ref={ref} className="text-center">
-      <p className="text-4xl sm:text-5xl font-bold text-teal mb-2">
+      <p className="text-3xl sm:text-4xl font-bold text-teal mb-1">
         {visible ? (isNumeric ? `${count}${suffix}` : value) : <span className="opacity-0">{value}</span>}
       </p>
-      <p className="text-white/60 text-sm">{label}</p>
+      <p className="text-gray-500 text-sm">{label}</p>
     </div>
   );
 }

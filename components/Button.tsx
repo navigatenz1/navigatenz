@@ -11,20 +11,16 @@ interface ButtonProps {
 }
 
 const variants = {
-  primary:
-    "bg-teal text-white hover:bg-teal-600 shadow-sm hover:shadow-lg hover:shadow-teal/25 hover:scale-[1.02] active:scale-[0.98]",
-  secondary:
-    "bg-navy text-white hover:bg-navy-600 shadow-sm hover:shadow-lg hover:shadow-navy/20 hover:scale-[1.02] active:scale-[0.98]",
-  outline:
-    "border-2 border-navy/20 text-navy hover:border-teal hover:text-teal hover:scale-[1.02] active:scale-[0.98]",
-  ghost:
-    "text-navy/60 hover:text-navy hover:bg-gray-50",
+  primary: "bg-teal text-white hover:bg-teal-600 active:scale-[0.98]",
+  secondary: "bg-navy text-white hover:bg-navy-600 active:scale-[0.98]",
+  outline: "border border-gray-200 text-navy hover:border-teal hover:text-teal active:scale-[0.98]",
+  ghost: "text-navy/60 hover:text-navy hover:bg-gray-50",
 };
 
 const sizes = {
-  sm: "px-5 py-2.5 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
+  sm: "px-4 py-2 text-sm",
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-7 py-3 text-base",
 };
 
 export default function Button({
