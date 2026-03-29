@@ -7,6 +7,7 @@ import Card from "@/components/Card";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedStat from "@/components/AnimatedStat";
 import QualificationChangeNotice from "@/components/QualificationChangeNotice";
+import { HeroAccordion } from "@/components/ui/interactive-image-accordion";
 import { useI18n } from "@/lib/i18n";
 import Link from "next/link";
 
@@ -102,64 +103,11 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/40 via-soft to-gold-50/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-soft via-white to-teal-50/20" />
         <div className="bg-dot-pattern" />
-
-        <Container className="relative py-24 sm:py-32 lg:py-40">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-teal-50 text-teal-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 animate-fade-in-up">
-                {t.hero.badge}
-              </div>
-              <h1 className="text-[2.75rem] sm:text-[3.25rem] lg:text-[3.5rem] font-bold text-navy leading-[1.1] tracking-tight animate-fade-in-up">
-                {t.hero.headline1}{" "}
-                <span className="text-teal">{t.hero.headline2}</span>
-              </h1>
-              <p className="mt-6 text-lg sm:text-xl text-navy/60 leading-relaxed max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-200">
-                {t.hero.subheadline}
-              </p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-400">
-                <Button href="/guides" size="lg">{t.hero.cta1}</Button>
-                <Button href="/assessment" variant="outline" size="lg">{t.hero.cta2}</Button>
-              </div>
-            </div>
-
-            {/* Hero images */}
-            <div className="relative hidden lg:block animate-fade-in animation-delay-400">
-              <div className="relative">
-                <div className="overflow-hidden rounded-2xl shadow-2xl shadow-navy/10">
-                  <Image
-                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80"
-                    alt="Diverse students studying together at university"
-                    width={800}
-                    height={533}
-                    className="object-cover w-full h-[340px] transition-transform duration-700 hover:scale-105"
-                    priority
-                  />
-                </div>
-                {/* Overlapping smaller image */}
-                <div className="absolute -bottom-8 -left-8 overflow-hidden rounded-2xl shadow-xl shadow-navy/10 border-4 border-white">
-                  <Image
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80"
-                    alt="Students collaborating on a project together"
-                    width={240}
-                    height={160}
-                    className="object-cover w-[200px] h-[140px]"
-                    priority
-                  />
-                </div>
-                {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-20 h-20 bg-gold/20 rounded-full blur-xl" />
-                <div className="absolute -bottom-4 right-12 w-16 h-16 bg-teal/20 rounded-full blur-xl" />
-              </div>
-            </div>
-          </div>
+        <Container className="relative py-16 sm:py-20 lg:py-28">
+          <HeroAccordion />
         </Container>
-
-        {/* Floating bg dots */}
-        <div className="absolute top-32 right-1/4 w-3 h-3 rounded-full bg-teal/15 animate-float" />
-        <div className="absolute top-48 left-1/4 w-2 h-2 rounded-full bg-gold/25 animate-float-slow" />
-        <div className="absolute bottom-24 left-1/3 w-2.5 h-2.5 rounded-full bg-coral/15 animate-float animation-delay-1000" />
       </section>
 
       {/* Wavy divider */}
@@ -170,7 +118,7 @@ export default function Home() {
       </div>
 
       {/* Features */}
-      <section className="py-24 sm:py-32 bg-white relative">
+      <section className="py-16 sm:py-20 bg-white relative">
         <div className="bg-dot-pattern" />
         <Container className="relative">
           <ScrollReveal>
