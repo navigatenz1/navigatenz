@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/accessibility`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE_URL}/share-your-story`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/ask`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
     ...blogSlugs.map((slug) => ({
       url: `${BASE_URL}/blog/${slug}`,
       lastModified: new Date(),

@@ -27,6 +27,7 @@ export default function Navbar() {
     { href: "/guides", label: t.nav.guides },
     { href: "/modules", label: t.nav.modules },
     { href: "/tools", label: t.nav.tools },
+    { href: "/ask", label: t.nav.qa },
     { href: "/about", label: t.nav.about },
     { href: "/volunteer", label: t.nav.joinUs },
   ];

@@ -10,6 +10,8 @@ import QualificationChangeNotice from "@/components/QualificationChangeNotice";
 import GuideBanner from "@/components/GuideBanner";
 import GuideFeedback from "@/components/GuideFeedback";
 import PrintButton from "@/components/PrintButton";
+import RelatedQuestions from "@/components/ask/RelatedQuestions";
+import { guideSlugToCategory } from "@/lib/qa";
 import {
   guides,
   getGuideBySlug,
@@ -237,6 +239,8 @@ export default async function GuidePage({ params }: Props) {
               <div className="print-footer">navigatenz.org</div>
 
               <GuideFeedback slug={params.slug} />
+
+              <RelatedQuestions category={guideSlugToCategory(params.slug)} />
 
               {/* Module CTA */}
               {guideToModule[params.slug] && (

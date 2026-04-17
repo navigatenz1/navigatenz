@@ -9,6 +9,8 @@ const footerLinks = {
     { href: "/guides", label: "Guides" },
     { href: "/modules", label: "Modules" },
     { href: "/tools", label: "Tools" },
+    { href: "/ask", label: "Q&A" },
+    { href: "/blog", label: "Blog" },
     { href: "/assessment", label: "Assessment" },
     { href: "/impact", label: "Impact" },
   ],

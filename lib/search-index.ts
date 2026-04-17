@@ -60,6 +60,7 @@ const pages: SearchItem[] = [
   { type: "page", title: "About Navigate NZ", description: "Why we exist and what we stand for.", href: "/about", tags: ["about", "mission", "founder"] },
   { type: "page", title: "Our Impact", description: "What we've built and where we're going.", href: "/impact", tags: ["impact", "metrics", "timeline"] },
   { type: "page", title: "Share Your Story", description: "Tell us how Navigate NZ helped you.", href: "/share-your-story", tags: ["story", "testimonial", "feedback", "share"] },
+  { type: "page", title: "Ask the Community", description: "Anonymous Q&A board — ask anything about NCEA, university, or NZ education.", href: "/ask", tags: ["ask", "question", "qa", "q&a", "community", "anonymous", "forum"] },
   { type: "page", title: "Privacy Policy", description: "How we protect your data.", href: "/privacy" },
   { type: "page", title: "Accessibility", description: "Our WCAG 2.1 AA commitment.", href: "/accessibility" },
 ];

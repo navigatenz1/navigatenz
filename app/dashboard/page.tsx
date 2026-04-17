@@ -397,6 +397,27 @@ function OverviewTab({
         </section>
       )}
 
+      {/* Got a question? */}
+      <section aria-labelledby="qa-cta-heading">
+        <div className="rounded-2xl bg-gradient-to-br from-teal-50 to-gold-50 border border-teal-100 p-6 sm:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1">
+              <h2 id="qa-cta-heading" className="text-lg font-bold text-navy">Got a question?</h2>
+              <p className="mt-1 text-sm text-navy/70 leading-relaxed">
+                Ask anonymously on our community board. No real name, no email — our team and volunteers answer.
+              </p>
+            </div>
+            <Link
+              href="/ask"
+              className="flex-shrink-0 inline-flex items-center gap-2 rounded-xl bg-teal text-white px-5 py-2.5 text-sm font-semibold hover:bg-teal-600 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+            >
+              Ask a question
+              <ArrowRight size={14} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 6. Quick tools */}
       <section aria-labelledby="quick-tools-heading">
         <div className="flex items-center justify-between mb-4">
