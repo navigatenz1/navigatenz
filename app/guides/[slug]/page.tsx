@@ -9,6 +9,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 import QualificationChangeNotice from "@/components/QualificationChangeNotice";
 import GuideBanner from "@/components/GuideBanner";
 import GuideFeedback from "@/components/GuideFeedback";
+import PrintButton from "@/components/PrintButton";
 import {
   guides,
   getGuideBySlug,
@@ -220,7 +221,20 @@ export default async function GuidePage({ params }: Props) {
                 </QualificationChangeNotice>
               )}
 
+              {/* Print-only header with logo + URL — hidden on screen via CSS */}
+              <div className="print-header">
+                <p style={{ fontWeight: 700, fontSize: "14pt" }}>Navigate NZ</p>
+                <p style={{ fontSize: "9pt", opacity: 0.6 }}>navigatenz.org/guides/{params.slug}</p>
+                <p style={{ fontSize: "9pt", opacity: 0.6 }}>Free student-led guide · {guide.category}</p>
+              </div>
+
+              <div className="flex items-center justify-end mb-4">
+                <PrintButton />
+              </div>
+
               <article className="guide-content" dangerouslySetInnerHTML={{ __html: guide.contentHtml }} />
+
+              <div className="print-footer">navigatenz.org</div>
 
               <GuideFeedback slug={params.slug} />
 

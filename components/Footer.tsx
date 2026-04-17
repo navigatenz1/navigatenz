@@ -13,11 +13,13 @@ const footerLinks = {
     { href: "/impact", label: "Impact" },
   ],
   Tools: [
-    { href: "/tools/university-matcher", label: "University Matcher" },
+    { href: "/tools/cost-calculator", label: "Cost Calculator" },
+    { href: "/tools/career-pathways", label: "Career Pathways" },
     { href: "/tools/credit-calculator", label: "Credit Calculator" },
+    { href: "/tools/university-matcher", label: "University Matcher" },
     { href: "/tools/scholarship-finder", label: "Scholarship Finder" },
-    { href: "/tools/key-dates", label: "Key Dates" },
-    { href: "/tools/personal-statement", label: "Personal Statement" },
+    { href: "/tools/living-costs", label: "Hall vs Flatting" },
+    { href: "/tools/pathway-finder", label: "Pathway Finder" },
   ],
   "Get Involved": [
     { href: "/volunteer", label: "Volunteer" },

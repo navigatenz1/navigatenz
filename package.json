@@ -11,6 +11,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.9.0",
     "@supabase/supabase-js": "^2.100.1",
+    "fuse.js": "^7.3.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.460.0",
     "next": "14.2.35",

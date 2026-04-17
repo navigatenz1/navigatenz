@@ -165,6 +165,12 @@ export default function CreditCalculatorPage() {
                     <p className="text-navy/60 text-sm mt-1">Keep going — check what you still need above and talk to your dean.</p>
                   )}
                 </div>
+                <ShareCreditsButton
+                  level={ncea3Met ? 3 : ncea2Met ? 2 : ncea1Met ? 1 : 0}
+                  ueMet={ueMet}
+                  creditsAway={Math.max(0, 80 - (l2 + l3))}
+                  rank={rankScore}
+                />
               </div>
             </div>
 
@@ -274,5 +280,31 @@ export default function CreditCalculatorPage() {
         </Container>
       </section>
     </>
+  );
+}
+
+function ShareCreditsButton({ level, ueMet, creditsAway, rank }: { level: number; ueMet: boolean; creditsAway: number; rank: number }) {
+  const [copied, setCopied] = useState(false);
+  const onShare = async () => {
+    // Aggregates only — no PII.
+    const { encodePayload } = await import("@/lib/share-encoding");
+    const payload = { l: level, ue: ueMet, away: creditsAway, rank: rank || undefined };
+    const url = `${window.location.origin}/share/credits/${encodePayload(payload)}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      window.prompt("Copy this share link:", url);
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={onShare}
+      className="mt-4 w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-navy hover:border-teal hover:text-teal transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+    >
+      {copied ? "Link copied!" : "Share my results (no personal info)"}
+    </button>
   );
 }

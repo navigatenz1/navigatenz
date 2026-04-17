@@ -17,8 +17,24 @@ export const metadata: Metadata = {
 
 const tools = [
   {
-    href: "/tools/university-matcher",
+    href: "/tools/cost-calculator",
+    icon: "💰",
+    title: "University Cost Calculator",
+    desc: "Estimate the true cost — tuition, accommodation, living",
+    duration: "~2 minutes",
+    preview: { label: "Total 3-year cost", value: "≈ $52,000", chip: "2026 est." },
+  },
+  {
+    href: "/tools/career-pathways",
     icon: "🧭",
+    title: "Career Pathways",
+    desc: "Match school subjects to real NZ careers (either direction)",
+    duration: "~3 minutes",
+    preview: { label: "Top career match", value: "Software Engineer", chip: "90% fit" },
+  },
+  {
+    href: "/tools/university-matcher",
+    icon: "🎓",
     title: "University Matcher",
     desc: "Find your best-fit NZ university in 5 questions",
     duration: "~3 minutes",
@@ -31,6 +47,22 @@ const tools = [
     desc: "Check if you're on track for NCEA and University Entrance",
     duration: "~2 minutes",
     preview: { label: "UE progress", value: "42 of 80 credits", chip: "On track" },
+  },
+  {
+    href: "/tools/living-costs",
+    icon: "🏠",
+    title: "Hall vs Flatting",
+    desc: "Compare accommodation costs in every NZ uni city",
+    duration: "Browse anytime",
+    preview: { label: "Cheapest student city", value: "Dunedin", chip: "≈ $360/wk" },
+  },
+  {
+    href: "/tools/pathway-finder",
+    icon: "🗺️",
+    title: "Pathway Finder",
+    desc: "Which qualification pathway is right for you?",
+    duration: "~2 minutes",
+    preview: { label: "4 quick questions", value: "NCEA · Cambridge · IB", chip: "Decision tree" },
   },
   {
     href: "/tools/scholarship-finder",

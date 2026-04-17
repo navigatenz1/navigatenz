@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "year": 2026,
+    "disclaimer": "Indicative costs — always verify with each university's official fee schedule before enrolling.",
+    "lastUpdated": "2026-04",
+    "sources": "University fee schedules; StudyLink living cost guidelines; studyingindunedin.nz and aucklanduni.ac.nz accommodation pages."
+  },
+  "universities": [
+    {
+      "id": "auckland",
+      "name": "University of Auckland",
+      "city": "Auckland",
+      "feesUrl": "https://www.auckland.ac.nz/en/study/fees-and-money-matters/tuition-fees.html",
+      "accommodationUrl": "https://www.auckland.ac.nz/en/on-campus/accommodation.html"
+    },
+    {
+      "id": "aut",
+      "name": "AUT",
+      "city": "Auckland",
+      "feesUrl": "https://www.aut.ac.nz/study/fees-and-scholarships/fees",
+      "accommodationUrl": "https://www.aut.ac.nz/student-life/accommodation"
+    },
+    {
+      "id": "victoria",
+      "name": "Victoria University of Wellington",
+      "city": "Wellington",
+      "feesUrl": "https://www.wgtn.ac.nz/students/money/fees-and-payments",
+      "accommodationUrl": "https://www.wgtn.ac.nz/accommodation"
+    },
+    {
+      "id": "canterbury",
+      "name": "University of Canterbury",
+      "city": "Christchurch",
+      "feesUrl": "https://www.canterbury.ac.nz/study/fees-and-funding",
+      "accommodationUrl": "https://www.canterbury.ac.nz/accommodation"
+    },
+    {
+      "id": "otago",
+      "name": "University of Otago",
+      "city": "Dunedin",
+      "feesUrl": "https://www.otago.ac.nz/fees",
+      "accommodationUrl": "https://www.otago.ac.nz/accommodation"
+    },
+    {
+      "id": "waikato",
+      "name": "University of Waikato",
+      "city": "Hamilton",
+      "feesUrl": "https://www.waikato.ac.nz/study/fees",
+      "accommodationUrl": "https://www.waikato.ac.nz/accommodation"
+    },
+    {
+      "id": "massey",
+      "name": "Massey University",
+      "city": "Palmerston North",
+      "feesUrl": "https://www.massey.ac.nz/study/fees/",
+      "accommodationUrl": "https://www.massey.ac.nz/study/life-at-massey/halls-of-residence/"
+    },
+    {
+      "id": "lincoln",
+      "name": "Lincoln University",
+      "city": "Lincoln",
+      "feesUrl": "https://www.lincoln.ac.nz/study/admission-and-enrolment/fees-scholarships-funding/",
+      "accommodationUrl": "https://www.lincoln.ac.nz/life-at-lincoln/accommodation/"
+    }
+  ],
+  "fields": [
+    { "id": "arts", "label": "Arts / Humanities / Social Sciences" },
+    { "id": "science", "label": "Science" },
+    { "id": "engineering", "label": "Engineering" },
+    { "id": "medicine", "label": "Medicine" },
+    { "id": "law", "label": "Law" },
+    { "id": "business", "label": "Business / Commerce" },
+    { "id": "health", "label": "Health Sciences / Nursing" },
+    { "id": "education", "label": "Education / Teaching" },
+    { "id": "design", "label": "Design / Architecture" }
+  ],
+  "tuition": {
+    "auckland":   { "arts": 7300, "science": 9500, "engineering": 11100, "medicine": 17500, "law": 8000, "business": 8300, "health": 9500, "education": 7200, "design": 9300 },
+    "aut":        { "arts": 7100, "science": 8900, "engineering": 10400, "medicine": 0,     "law": 7800, "business": 7900, "health": 9200, "education": 7000, "design": 9000 },
+    "victoria":   { "arts": 7200, "science": 9300, "engineering": 10900, "medicine": 0,     "law": 7900, "business": 8100, "health": 9300, "education": 7200, "design": 9100 },
+    "canterbury": { "arts": 7100, "science": 9200, "engineering": 11200, "medicine": 0,     "law": 7800, "business": 8000, "health": 9200, "education": 7100, "design": 9100 },
+    "otago":      { "arts": 7200, "science": 9400, "engineering": 10800, "medicine": 17800, "law": 7900, "business": 8100, "health": 9400, "education": 7200, "design": 9200 },
+    "waikato":    { "arts": 6900, "science": 8800, "engineering": 10300, "medicine": 0,     "law": 7700, "business": 7800, "health": 9000, "education": 6900, "design": 8900 },
+    "massey":     { "arts": 7000, "science": 8900, "engineering": 10500, "medicine": 0,     "law": 0,    "business": 7900, "health": 9100, "education": 7000, "design": 8900 },
+    "lincoln":    { "arts": 6900, "science": 9000, "engineering": 10000, "medicine": 0,     "law": 0,    "business": 7700, "health": 0,    "education": 0,    "design": 8800 }
+  },
+  "livingCostsPerWeek": {
+    "Auckland":          { "hall": 450, "flatting": 320, "foodTransport": 200 },
+    "Wellington":        { "hall": 430, "flatting": 290, "foodTransport": 180 },
+    "Christchurch":      { "hall": 380, "flatting": 230, "foodTransport": 160 },
+    "Dunedin":           { "hall": 360, "flatting": 200, "foodTransport": 150 },
+    "Hamilton":          { "hall": 360, "flatting": 220, "foodTransport": 160 },
+    "Palmerston North":  { "hall": 340, "flatting": 200, "foodTransport": 150 },
+    "Lincoln":           { "hall": 380, "flatting": 230, "foodTransport": 160 }
+  },
+  "feesFree": {
+    "url": "https://www.feesfree.govt.nz",
+    "description": "Fees Free is a Government scheme that may cover your first or final year of tertiary study. As of 2025 the policy changed to cover your final year instead of your first year — check the official site before making plans.",
+    "eligibilityRules": [
+      "NZ citizen, permanent resident, or protected refugee",
+      "You haven't previously done more than a half-year (60 credits or equivalent) of tertiary study",
+      "You're enrolled in an approved programme at an approved provider"
+    ]
+  },
+  "studentLoan": {
+    "weeklyLivingLimit": 316.93,
+    "courseRelatedLimit": 1000,
+    "interestWhileInNZ": 0,
+    "repaymentRateAboveThreshold": 0.12,
+    "repaymentThresholdAnnual": 24128,
+    "note": "Your loan is interest-free while you live in NZ. Repayments start automatically once you earn above the threshold."
+  },
+  "studentAllowance": {
+    "note": "Student Allowance is parental-income-tested if you're under 24. Approximate thresholds: full allowance under combined parental income ~$60k, reducing to nil around $100k-110k depending on family size. Exact figures at studylink.govt.nz.",
+    "studyLinkUrl": "https://www.studylink.govt.nz"
+  }
+}

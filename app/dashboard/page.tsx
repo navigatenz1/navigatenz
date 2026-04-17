@@ -24,6 +24,7 @@ import KeyDateItem from "@/components/dashboard/KeyDateItem";
 import PathwayTimeline from "@/components/dashboard/PathwayTimeline";
 import Sidebar from "@/components/dashboard/Sidebar";
 import MobileTabBar from "@/components/dashboard/MobileTabBar";
+import OnTrackChecker from "@/components/dashboard/OnTrackChecker";
 import { useAuth } from "@/lib/auth-context";
 import { createClient } from "@/lib/supabase/client";
 import {
@@ -192,6 +193,14 @@ export default function DashboardPage() {
       </div>
 
       <MobileTabBar active={tab} onSelect={setTab} />
+
+      {assessment && (
+        <OnTrackChecker
+          milestones={milestones}
+          modulesDone={completedModules.length}
+          hasUrgentDate={false}
+        />
+      )}
     </div>
   );
 }
@@ -486,9 +495,12 @@ function PathwayTab({ milestones, progress, assessment }: { milestones: Mileston
 /* ── Tools, Modules, Universities, Guides, Settings ── */
 
 const dashboardTools = [
-  { href: "/tools/credit-calculator", icon: "🧮", title: "NCEA Credit Calculator", desc: "Check if you're on track" },
-  { href: "/tools/university-matcher", icon: "🧭", title: "University Matcher", desc: "Find your best-fit NZ uni" },
-  { href: "/tools/scholarship-finder", icon: "🔍", title: "Scholarship Finder", desc: "Search 20+ NZ scholarships" },
+  { href: "/tools/cost-calculator", icon: "💰", title: "Cost Calculator", desc: "Estimate total uni cost" },
+  { href: "/tools/career-pathways", icon: "🧭", title: "Career Pathways", desc: "Subjects → NZ careers" },
+  { href: "/tools/credit-calculator", icon: "🧮", title: "Credit Calculator", desc: "Check if you're on track" },
+  { href: "/tools/university-matcher", icon: "🎓", title: "University Matcher", desc: "Find your best-fit NZ uni" },
+  { href: "/tools/living-costs", icon: "🏠", title: "Hall vs Flatting", desc: "Compare living costs" },
+  { href: "/tools/scholarship-finder", icon: "🔍", title: "Scholarship Finder", desc: "Search NZ scholarships" },
   { href: "/tools/key-dates", icon: "📅", title: "Key Dates", desc: "Never miss a deadline" },
   { href: "/tools/personal-statement", icon: "✍️", title: "Personal Statement", desc: "Write yours step by step" },
 ];

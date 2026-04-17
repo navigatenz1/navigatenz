@@ -100,6 +100,40 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Plan your future — 3 flagship tools */}
+      <section className="py-16 sm:py-24 bg-white relative" aria-labelledby="plan-future-heading">
+        <Container>
+          <ScrollReveal>
+            <div className="text-center max-w-xl mx-auto mb-10">
+              <h2 id="plan-future-heading" className="text-3xl sm:text-4xl font-bold text-navy">Plan your future</h2>
+              <p className="mt-4 text-navy/60">
+                Three interactive tools that answer the questions every NZ family asks — free, no account, no catch.
+              </p>
+            </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {[
+              { href: "/tools/cost-calculator", icon: "💰", title: "Cost Calculator", desc: "What will university actually cost your family?" },
+              { href: "/tools/career-pathways", icon: "🧭", title: "Career Pathways", desc: "Match school subjects to real NZ careers." },
+              { href: "/tools/pathway-finder", icon: "🗺️", title: "Pathway Finder", desc: "NCEA, Cambridge, or IB? Four questions, honest answer." },
+            ].map((t) => (
+              <Link
+                key={t.href}
+                href={t.href}
+                className="group rounded-2xl bg-white border border-gray-100 shadow-sm p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+              >
+                <span className="text-3xl" aria-hidden="true">{t.icon}</span>
+                <h3 className="mt-4 font-bold text-navy group-hover:text-teal transition-colors">{t.title}</h3>
+                <p className="mt-1 text-sm text-navy/60 leading-relaxed">{t.desc}</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-teal group-hover:gap-2 transition-all">
+                  Try it free <span aria-hidden="true">&rarr;</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* How it works — three steps, no repetition */}
       <section className="py-16 sm:py-24 bg-white relative">
         <Container className="relative">
@@ -140,10 +174,7 @@ export default function Home() {
                 We&apos;d love to hear your story. Your feedback helps us build better guides for families like yours.
               </p>
               <div className="mt-8">
-                <Button
-                  href="mailto:admin@navigatenz.org?subject=My%20Navigate%20NZ%20Story"
-                  size="lg"
-                >
+                <Button href="/share-your-story" size="lg">
                   Share your story
                 </Button>
               </div>

@@ -83,8 +83,8 @@ export default function ImpactPage() {
               {[
                 { n: "14", label: "Free Guides", icon: "📚" },
                 { n: "12", label: "Action Modules", icon: "✅" },
-                { n: "5", label: "Interactive Tools", icon: "🛠️" },
-                { n: "8", label: "Universities Covered", icon: "🎓" },
+                { n: "9", label: "Interactive Tools", icon: "🛠️" },
+                { n: "8", label: "NZ Universities", icon: "🎓" },
                 { n: "20+", label: "Scholarships Listed", icon: "💰" },
                 { n: "3", label: "Languages", icon: "🌏" },
               ].map((item) => (

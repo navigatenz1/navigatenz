@@ -51,7 +51,14 @@ const categoryStripe: Record<string, string> = {
 export default function GuidesPage() {
   const { t } = useI18n();
   const [activeCategory, setActiveCategory] = useState("All");
-  const filtered = activeCategory === "All" ? guidesData : guidesData.filter((g) => g.category === activeCategory);
+  const [query, setQuery] = useState("");
+  const filtered = guidesData.filter((g) => {
+    const inCategory = activeCategory === "All" || g.category === activeCategory;
+    if (!inCategory) return false;
+    if (!query) return true;
+    const q = query.toLowerCase();
+    return g.title.toLowerCase().includes(q) || g.description.toLowerCase().includes(q);
+  });
 
   return (
     <>
@@ -69,13 +76,34 @@ export default function GuidesPage() {
             <p>NZ&apos;s qualification system is changing. The information in these guides applies to students currently in Years 10-13 (graduating by 2029). We&apos;ll update as details are confirmed.</p>
           </QualificationChangeNotice>
 
+          <div className="relative mb-6">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 text-navy/30">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search guides…"
+              aria-label="Filter guides"
+              className="w-full rounded-2xl border border-gray-200 bg-white pl-11 pr-4 py-3 text-sm text-navy placeholder:text-navy/40 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal transition-all"
+            />
+          </div>
+
           <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 mb-10 -mx-4 px-4 sm:mx-0 sm:px-0">
             {categories.map((cat) => (
-              <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat ? "bg-teal text-white shadow-sm shadow-teal/20" : "bg-gray-100 text-navy/60 hover:bg-gray-200 hover:text-navy"}`}>
+              <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 ${activeCategory === cat ? "bg-teal text-white shadow-sm shadow-teal/20" : "bg-gray-100 text-navy/60 hover:bg-gray-200 hover:text-navy"}`}>
                 {cat}
               </button>
             ))}
           </div>
+
+          {filtered.length === 0 && (
+            <div className="rounded-2xl bg-white border border-gray-100 p-10 text-center text-navy/50">
+              No guides match &quot;{query}&quot;. Try a different search term or clear the filter.
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((guide, i) => (

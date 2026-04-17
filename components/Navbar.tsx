@@ -3,9 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Search } from "lucide-react";
 import Logo from "./Logo";
 import Button from "./Button";
 import Container from "./Container";
+import SearchModal from "./SearchModal";
 import { useAuth } from "@/lib/auth-context";
 import { useI18n } from "@/lib/i18n";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -15,6 +17,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, loading, signOut } = useAuth();
   const { t } = useI18n();
@@ -32,6 +35,17 @@ export default function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, []);
 
   useEffect(() => {
@@ -89,6 +103,15 @@ export default function Navbar() {
                 </Link>
               );
             })}
+
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search"
+              className="p-2 rounded-lg text-navy/50 hover:text-navy hover:bg-soft transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+            >
+              <Search size={18} strokeWidth={1.75} aria-hidden="true" />
+            </button>
 
             <LanguageSwitcher />
 
@@ -174,10 +197,19 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile search + hamburger */}
+          <div className="md:hidden flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search"
+              className="p-2 text-navy/60 hover:text-navy rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+            >
+              <Search size={20} strokeWidth={1.75} aria-hidden="true" />
+            </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-navy"
+            className="p-2 text-navy"
             aria-label="Toggle menu"
           >
             <svg
@@ -202,6 +234,7 @@ export default function Navbar() {
               )}
             </svg>
           </button>
+          </div>
         </nav>
 
         {/* Mobile menu */}
@@ -277,6 +310,7 @@ export default function Navbar() {
           </div>
         )}
       </Container>
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

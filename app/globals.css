@@ -178,3 +178,101 @@ main { animation: page-fade 0.15s ease-out; }
   50% { box-shadow: 0 0 0 5px rgba(232, 93, 74, 0); }
 }
 .animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* ── Print styles — guide pages ── */
+@media print {
+  /* Hide chrome and anything interactive */
+  header, footer, nav,
+  .no-print,
+  [data-no-print],
+  .sidebar-sticky,
+  .animate-fade-in-up,
+  .animate-fade-in,
+  button, a.button,
+  .reading-progress {
+    display: none !important;
+  }
+
+  /* Reset cream background to white for ink economy */
+  body, .bg-soft, .bg-teal-50, .bg-gold-50, .bg-coral-50, .bg-navy {
+    background: white !important;
+    color: #1B2A4A !important;
+  }
+
+  /* Strip gradients and shadows */
+  *, *::before, *::after {
+    background-image: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    color: #1B2A4A !important;
+  }
+
+  /* Page margin + baseline */
+  @page {
+    margin: 1.8cm 1.5cm;
+  }
+
+  body {
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  /* Print header band with logo text */
+  .print-header {
+    display: block !important;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #1B2A4A;
+  }
+
+  /* Print footer band with URL */
+  .print-footer {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #1B2A4A !important;
+    padding-top: 0.5rem;
+    border-top: 1px solid #ccc;
+  }
+
+  /* Keep guide content readable */
+  .guide-content {
+    font-size: 11pt !important;
+    max-width: 100% !important;
+  }
+  .guide-content h2 {
+    page-break-after: avoid;
+    margin-top: 1.2rem !important;
+  }
+  .guide-content h3 {
+    page-break-after: avoid;
+  }
+  .guide-content p, .guide-content li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Force every link target visible on paper */
+  article a[href^="http"]::after,
+  article a[href^="/"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #333 !important;
+  }
+  article a[href^="#"]::after,
+  article a[href^="mailto:"]::after {
+    content: "";
+  }
+
+  /* Hide images in print by default to avoid ink usage */
+  article img, section img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}
+
+.print-header, .print-footer { display: none; }

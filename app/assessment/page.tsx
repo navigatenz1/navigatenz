@@ -6,6 +6,7 @@ import Container from "@/components/Container";
 import Button from "@/components/Button";
 import { useAuth } from "@/lib/auth-context";
 import { createClient } from "@/lib/supabase/client";
+import { encodePayload } from "@/lib/share-encoding";
 
 const TOTAL_STEPS = 7;
 
@@ -200,6 +201,7 @@ export default function AssessmentPage() {
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-600">
             <Button href="/dashboard" size="lg">Go to My Dashboard</Button>
             <Button href="/guides" variant="outline">Browse Guides</Button>
+            <ShareResultsButton data={data} />
           </div>
         </Container>
       </section>
@@ -472,6 +474,38 @@ function StepGoals({ goals, setGoals, onSubmit, submitting, onSkip }: { goals: s
         )}
       </div>
     </div>
+  );
+}
+
+/* ── Share button — encodes aggregate-only payload, no PII ── */
+
+function ShareResultsButton({ data }: { data: AssessmentData }) {
+  const [copied, setCopied] = useState(false);
+  const onShare = async () => {
+    // IMPORTANT: never include email, name, or any PII. Aggregates only.
+    const payload = {
+      y: data.year_level,
+      q: data.qualification_pathway,
+      f: data.first_gen,
+      g: data.goals?.slice(0, 200) ?? "",
+    };
+    const url = `${window.location.origin}/share/assessment/${encodePayload(payload)}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      window.prompt("Copy this share link:", url);
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={onShare}
+      className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-5 py-3 text-sm font-semibold text-navy hover:border-teal hover:text-teal transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+    >
+      {copied ? "Link copied!" : "Share my results"}
+    </button>
   );
 }
 

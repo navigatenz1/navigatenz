@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getAllBlogPosts } from "@/lib/blog";
 
 const BASE_URL = "https://navigatenz.org";
 
@@ -19,8 +20,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const tools = [
-    "university-matcher", "credit-calculator", "scholarship-finder", "key-dates", "personal-statement",
+    "cost-calculator", "career-pathways", "credit-calculator", "university-matcher",
+    "living-costs", "pathway-finder", "scholarship-finder", "key-dates", "personal-statement",
   ];
+
+  let blogSlugs: string[] = [];
+  try {
+    blogSlugs = getAllBlogPosts().map((p) => p.slug);
+  } catch {
+    blogSlugs = [];
+  }
 
   return [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
@@ -33,6 +42,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/volunteer`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE_URL}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE_URL}/accessibility`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/share-your-story`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    ...blogSlugs.map((slug) => ({
+      url: `${BASE_URL}/blog/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
     ...guides.map((slug) => ({
       url: `${BASE_URL}/guides/${slug}`,
       lastModified: new Date(),
