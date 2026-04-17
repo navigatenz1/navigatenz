@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code — local skill installs and session data
+.claude/
+.agents/
+skills-lock.json

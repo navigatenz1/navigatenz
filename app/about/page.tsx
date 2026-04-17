@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/Container";
 import Card from "@/components/Card";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -10,10 +11,11 @@ export const metadata: Metadata = {
 };
 
 const milestones = [
-  { year: "2023", title: "The idea", description: "Frustrated by the lack of clear info, our founder starts sketching a better way." },
-  { year: "2024", title: "Research & development", description: "Interviews with 50+ students and families to understand the gaps." },
-  { year: "2025", title: "Navigate NZ launches", description: "Free guides and the pathway assessment go live for all NZ students." },
-  { year: "2026", title: "Growing the platform", description: "Multilingual support, school partnerships, and community features." },
+  { year: "March 2026", title: "Platform launched", description: "Navigate NZ goes live at navigatenz.org." },
+  { year: "March 2026", title: "14 guides published", description: "Plain-language guides covering NCEA, University Entrance, scholarships, StudyLink, and more." },
+  { year: "March 2026", title: "5 interactive tools launched", description: "Credit calculator, university matcher, scholarship finder, key-dates timeline, personal-statement helper." },
+  { year: "April 2026", title: "Volunteer programme launched", description: "Student volunteers join across content, outreach, design, and translation." },
+  { year: "Coming soon", title: "School partnerships", description: "Working with NZ schools and careers advisors to reach more first-generation families.", dashed: true },
 ];
 
 export default function AboutPage() {
@@ -149,11 +151,12 @@ export default function AboutPage() {
         <Container>
           <ScrollReveal>
             <div className="max-w-4xl mx-auto">
+              {/* TODO(images): verify this photo renders; swap if broken. Must not match any guide image. */}
               <div className="overflow-hidden rounded-2xl shadow-lg shadow-gray-200/50">
                 <Image
-                  src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1000&q=80"
-                  alt="Diverse group of students and families in New Zealand"
-                  width={1000}
+                  src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80"
+                  alt="Diverse group of New Zealand students from Māori, Pasifika, Asian, and European backgrounds sharing a moment together"
+                  width={1200}
                   height={500}
                   className="w-full h-[300px] sm:h-[400px] object-cover"
                 />
@@ -172,22 +175,27 @@ export default function AboutPage() {
         <Container className="relative">
           <ScrollReveal>
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl font-bold text-navy mb-12 text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-navy mb-3 text-center">
                 Our Journey
               </h2>
+              <p className="text-navy/60 text-center mb-12">
+                Track our progress on the{" "}
+                <Link href="/impact" className="text-teal hover:underline font-medium">impact page</Link>.
+              </p>
               <div className="relative">
-                <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 bg-teal/20" />
-                <div className="space-y-10">
-                  {milestones.map((m, i) => (
-                    <div key={m.year} className="relative flex gap-6 sm:gap-8">
-                      <div className={`relative z-10 flex-shrink-0 w-12 sm:w-16 h-12 sm:h-16 rounded-2xl flex items-center justify-center text-sm font-bold ${
-                        i === milestones.length - 1
-                          ? "bg-teal/10 text-teal border-2 border-dashed border-teal/30"
+                <div className="absolute left-3 sm:left-4 top-0 bottom-0 w-0.5 bg-teal/20" aria-hidden="true" />
+                <div className="space-y-8">
+                  {milestones.map((m) => (
+                    <div key={`${m.year}-${m.title}`} className="relative flex gap-5 sm:gap-6">
+                      <div className={`relative z-10 flex-shrink-0 mt-1.5 w-6 sm:w-8 h-6 sm:h-8 rounded-full flex items-center justify-center ${
+                        m.dashed
+                          ? "bg-white text-teal border-2 border-dashed border-teal/40"
                           : "bg-teal text-white shadow-sm shadow-teal/20"
                       }`}>
-                        {m.year.slice(2)}
+                        <span className="w-2 h-2 rounded-full bg-current" aria-hidden="true" />
                       </div>
-                      <div className="pt-2 sm:pt-3">
+                      <div>
+                        <p className="text-xs font-semibold text-teal uppercase tracking-wider mb-1">{m.year}</p>
                         <h3 className="font-semibold text-navy text-lg">{m.title}</h3>
                         <p className="text-navy/60 text-sm mt-1 leading-relaxed">{m.description}</p>
                       </div>
@@ -240,10 +248,13 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                     </svg>
                   </div>
-                  <h3 className="font-semibold text-navy mb-2 text-lg">Partner</h3>
-                  <p className="text-navy/60 text-sm leading-relaxed">
-                    Are you a school, university, or organisation? Partner with us to reach more students.
+                  <h3 className="font-semibold text-navy mb-2 text-lg">Volunteer</h3>
+                  <p className="text-navy/60 text-sm leading-relaxed mb-4">
+                    Writers, designers, translators, ambassadors — see our open roles.
                   </p>
+                  <Link href="/volunteer" className="text-teal text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                    See open roles <span aria-hidden="true">&rarr;</span>
+                  </Link>
                 </Card>
               </div>
             </div>

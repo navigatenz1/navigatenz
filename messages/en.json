@@ -11,7 +11,8 @@
     "settings": "Settings",
     "tools": "Tools",
     "uniMatcher": "Uni Matcher",
-    "impact": "Impact"
+    "impact": "Impact",
+    "joinUs": "Join Us"
   },
   "hero": {
     "badge": "100% Free · Community Built · Open to Everyone",
@@ -59,7 +60,7 @@
   "stats": {
     "s1": "$0",
     "s1label": "Always free for every family",
-    "s2": "5",
+    "s2": "14",
     "s2label": "Plain-language guides and growing",
     "s3": "100%",
     "s3label": "Independent — no ads, no sponsors"
@@ -224,7 +225,7 @@
   },
   "guideBanner": "Free guide · No account required · Share with anyone",
   "footer": {
-    "nonprofit": "Navigate NZ is a registered nonprofit. We will never charge for access, sell your data, or accept advertising.",
+    "nonprofit": "Navigate NZ is a student-led nonprofit project. We will never charge for access, sell your data, or accept advertising.",
     "tagline": "A community project built with aroha in Aotearoa",
     "stayUpdated": "Stay updated",
     "subscribe": "Subscribe",

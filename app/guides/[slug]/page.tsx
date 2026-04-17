@@ -8,6 +8,7 @@ import Card from "@/components/Card";
 import ReadingProgress from "@/components/ReadingProgress";
 import QualificationChangeNotice from "@/components/QualificationChangeNotice";
 import GuideBanner from "@/components/GuideBanner";
+import GuideFeedback from "@/components/GuideFeedback";
 import {
   guides,
   getGuideBySlug,
@@ -61,21 +62,22 @@ const guideToModule: Record<string, { slug: string; title: string }> = {
   "studylink-complete-guide": { slug: "set-up-studylink", title: "Set Up StudyLink" },
 };
 
+// Must stay aligned with the 14-unique mapping in app/guides/page.tsx.
 const guideImages: Record<string, { src: string; alt: string }> = {
-  "understanding-nz-schools": { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&q=80", alt: "New Zealand school building" },
-  "ncea-vs-cambridge-vs-ib": { src: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80", alt: "Student studying with open books" },
-  "how-to-get-into-university": { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80", alt: "University graduation ceremony" },
-  "your-rights-and-support": { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&q=80", alt: "Diverse students in a supportive classroom" },
-  "scholarship-guide": { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80", alt: "Financial documents and scholarship papers" },
-  "nz-qualification-changes": { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80", alt: "Students in a classroom" },
-  "subject-selection-strategy": { src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80", alt: "Student planning subjects" },
-  "understanding-ncea-credits": { src: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80", alt: "Student studying with books" },
-  "what-to-do-if-behind": { src: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&q=80", alt: "Student working through challenges" },
-  "preparing-for-exams": { src: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=1200&q=80", alt: "Student preparing for exams" },
-  "first-gen-experience": { src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1200&q=80", alt: "Diverse group of students" },
-  "guide-for-parents": { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&q=80", alt: "Family and students" },
-  "studylink-complete-guide": { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80", alt: "Financial documents" },
-  "university-open-days": { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80", alt: "University campus visit" },
+  "nz-qualification-changes": { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80", alt: "Students working through coursework in a bright NZ classroom" },
+  "understanding-nz-schools": { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&q=80", alt: "Exterior of a New Zealand secondary school building with students walking past" },
+  "understanding-ncea-credits": { src: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80", alt: "Notebook with a credit tally and a calculator — planning NCEA credits" },
+  "ncea-vs-cambridge-vs-ib": { src: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80", alt: "Stacked textbooks representing three different qualification pathways" },
+  "subject-selection-strategy": { src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80", alt: "Year 10 student working through a subject option booklet with a pen" },
+  "preparing-for-exams": { src: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=1200&q=80", alt: "Study desk set up with past papers, highlighters, and a cup of tea" },
+  "what-to-do-if-behind": { src: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&q=80", alt: "Student walking forward along a tree-lined path — there's always a way through" },
+  "how-to-get-into-university": { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80", alt: "Student reading university admissions information at a desk" },
+  "scholarship-guide": { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80", alt: "Scholarship application letter resting on a wooden desk" },
+  "studylink-complete-guide": { src: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1200&q=80", alt: "Student completing a StudyLink application form on a laptop" },
+  "university-open-days": { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80", alt: "Students touring a university campus on an open day" },
+  "your-rights-and-support": { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&q=80", alt: "Diverse students working with a supportive teacher in an NZ classroom" },
+  "first-gen-experience": { src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1200&q=80", alt: "Diverse group of first-generation students standing together outdoors" },
+  "guide-for-parents": { src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80", alt: "A parent and their teenage child reviewing study materials together" },
 };
 
 export default async function GuidePage({ params }: Props) {
@@ -109,11 +111,13 @@ export default async function GuidePage({ params }: Props) {
 
         <Container className="relative h-full flex flex-col justify-end pb-8 sm:pb-10">
           {/* Breadcrumb */}
-          <nav className="mb-4 text-sm text-white/40 flex items-center gap-2">
+          <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/40 flex items-center gap-2 flex-wrap">
             <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
-            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
             <Link href="/guides" className="hover:text-white/70 transition-colors">Guides</Link>
-            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+            <span className="text-white/50">{guide.category}</span>
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
             <span className="text-white/60 truncate">{guide.title}</span>
           </nav>
 
@@ -123,11 +127,15 @@ export default async function GuidePage({ params }: Props) {
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight max-w-3xl">
             {guide.title}
           </h1>
-          <div className="mt-3 flex items-center gap-3 text-sm text-white/50">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            {guide.readTime}
+          <div className="mt-3 flex items-center gap-4 text-sm text-white/50 flex-wrap">
+            <span className="flex items-center gap-1.5">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {guide.readTime}
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>Last updated: April 2026</span>
           </div>
         </Container>
       </section>
@@ -201,17 +209,20 @@ export default async function GuidePage({ params }: Props) {
                   <p>This guide is based on current NCEA requirements. If you&apos;re graduating before 2030, this information applies to you.</p>
                 </QualificationChangeNotice>
               )}
+              {params.slug === "preparing-for-exams" && (
+                <QualificationChangeNotice variant="inline">
+                  <p>This guide covers current NCEA and Cambridge exam formats. NCEA is being phased out 2028-2030 — if you&apos;re sitting exams in 2025-2027, current formats still apply.</p>
+                </QualificationChangeNotice>
+              )}
+              {params.slug === "subject-selection-strategy" && (
+                <QualificationChangeNotice variant="inline">
+                  <p>Subject selection logic here reflects the current NCEA credit system. NCEA is being replaced from 2028-2030, but UE and subject prerequisites for students graduating before 2030 are unchanged.</p>
+                </QualificationChangeNotice>
+              )}
 
               <article className="guide-content" dangerouslySetInnerHTML={{ __html: guide.contentHtml }} />
 
-              <div className="mt-16 p-8 bg-soft rounded-2xl text-center">
-                <p className="text-navy font-semibold mb-2">Was this helpful?</p>
-                <p className="text-navy/60 text-sm mb-4">Let us know so we can improve our guides</p>
-                <div className="flex items-center justify-center gap-3">
-                  <button className="px-6 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-navy hover:bg-white hover:border-teal hover:text-teal transition-all">Yes, thanks!</button>
-                  <button className="px-6 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-navy hover:bg-white hover:border-gray-300 transition-all">Not really</button>
-                </div>
-              </div>
+              <GuideFeedback slug={params.slug} />
 
               {/* Module CTA */}
               {guideToModule[params.slug] && (

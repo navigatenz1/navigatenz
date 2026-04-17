@@ -25,6 +25,7 @@ export default function Navbar() {
     { href: "/modules", label: t.nav.modules },
     { href: "/tools", label: t.nav.tools },
     { href: "/about", label: t.nav.about },
+    { href: "/volunteer", label: t.nav.joinUs },
   ];
 
   useEffect(() => {
@@ -77,13 +78,13 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-sm font-medium transition-colors ${
+                  className={`relative text-sm font-medium transition-colors rounded-md px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 ${
                     active ? "text-teal" : "text-navy/70 hover:text-navy"
                   }`}
                 >
                   {link.label}
                   {active && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-teal rounded-full" />
+                    <span className="absolute -bottom-1 left-1 right-1 h-0.5 bg-teal rounded-full" aria-hidden="true" />
                   )}
                 </Link>
               );

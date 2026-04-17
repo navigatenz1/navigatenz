@@ -22,13 +22,19 @@ const defaultStats: Stats = { students: 0, assessments: 0, checkpoints: 0, guide
 
 export default function ImpactPage() {
   const [stats, setStats] = useState<Stats>(defaultStats);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     fetch("/api/impact-stats")
       .then((r) => r.json())
-      .then(setStats)
-      .catch(() => {});
+      .then((data) => {
+        setStats(data);
+        setLoaded(true);
+      })
+      .catch(() => setLoaded(true));
   }, []);
+
+  const hasRealUsage = stats.students > 0 && stats.assessments > 0 && stats.checkpoints > 0;
 
   return (
     <>
@@ -41,15 +47,30 @@ export default function ImpactPage() {
         </Container>
       </section>
 
-      {/* Live Stats */}
+      {/* Live Stats — only shown once real usage exists; until then, honest launch message */}
       <section className="py-16 sm:py-20 bg-navy">
         <Container>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            <AnimatedStat value={String(stats.students)} label="Students Registered" />
-            <AnimatedStat value={String(stats.assessments)} label="Assessments Completed" />
-            <AnimatedStat value={String(stats.checkpoints)} label="Module Checkpoints" />
-            <AnimatedStat value={String(stats.tools)} label="Interactive Tools" />
-          </div>
+          {!loaded ? (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto" aria-busy="true">
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} className="h-24 rounded-2xl bg-white/5 animate-pulse" />
+              ))}
+            </div>
+          ) : hasRealUsage ? (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
+              <AnimatedStat value={String(stats.students)} label="Students Registered" />
+              <AnimatedStat value={String(stats.assessments)} label="Assessments Completed" />
+              <AnimatedStat value={String(stats.checkpoints)} label="Module Checkpoints" />
+              <AnimatedStat value={String(stats.tools)} label="Interactive Tools" />
+            </div>
+          ) : (
+            <div className="max-w-2xl mx-auto text-center text-white">
+              <p className="text-2xl sm:text-3xl font-bold mb-4">We just launched.</p>
+              <p className="text-white/70 text-lg leading-relaxed">
+                Our impact story is being written right now. Every guide read, every pathway charted, every family supported — that&apos;s the impact we&apos;re building with you.
+              </p>
+            </div>
+          )}
         </Container>
       </section>
 

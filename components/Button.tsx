@@ -32,7 +32,7 @@ export default function Button({
   type = "button",
   onClick,
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 ${variants[variant]} ${sizes[size]} ${className}`;
 
   if (href) {
     return (

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
@@ -718,8 +719,7 @@ function UniversitiesTab({ preferredUnis }: { preferredUnis: string[] }) {
           return (
             <Card key={uni.name} hover={false} className={`p-0 overflow-hidden ${isPref ? "border-l-4 border-l-gold" : ""}`}>
               <div className="h-32 bg-gray-100 relative overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={uni.image} alt={`${uni.city} cityscape`} className="w-full h-full object-cover" />
+                <Image src={uni.image} alt={`${uni.city} cityscape`} width={400} height={128} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
                 <div className="absolute bottom-3 left-4 flex items-center gap-2">
                   <span className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[10px] font-bold" style={{ backgroundColor: uni.color }}>{uni.abbr.slice(0,3)}</span>

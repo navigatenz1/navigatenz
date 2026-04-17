@@ -11,7 +11,8 @@
     "settings": "设置",
     "tools": "工具",
     "uniMatcher": "大学匹配",
-    "impact": "影响力"
+    "impact": "影响力",
+    "joinUs": "加入我们"
   },
   "hero": {
     "badge": "100% 免费 · 社区共建 · 对所有人开放",
@@ -59,7 +60,7 @@
   "stats": {
     "s1": "$0",
     "s1label": "对每个家庭永远免费",
-    "s2": "5",
+    "s2": "14",
     "s2label": "简明易懂的指南",
     "s3": "100%",
     "s3label": "独立运营 — 无广告，无赞助商"
@@ -224,7 +225,7 @@
   },
   "guideBanner": "免费指南 · 无需账户 · 与任何人分享",
   "footer": {
-    "nonprofit": "Navigate NZ 是注册非营利组织。我们永远不会收取费用、出售数据或接受广告。",
+    "nonprofit": "Navigate NZ 是学生主导的非营利项目。我们永远不会收取费用、出售数据或接受广告。",
     "tagline": "在新西兰用爱建造的社区项目",
     "stayUpdated": "保持更新",
     "subscribe": "订阅",

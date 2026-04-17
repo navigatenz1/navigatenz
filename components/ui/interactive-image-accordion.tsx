@@ -2,42 +2,50 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import FallbackImage from "@/components/FallbackImage";
 import { useI18n } from "@/lib/i18n";
 
+// Each accordion image must be unique and must NOT match any image used on /guides.
+// TODO(images): re-verify these five photos render correctly; swap if any are dead.
 const accordionItems = [
   {
     id: 1,
     title: "Understand the System",
     subtitle: "Schools, NCEA, zoning explained",
-    imageUrl: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1974&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1200&q=80",
+    imageAlt: "Students walking into a modern university library",
     link: "/guides",
   },
   {
     id: 2,
     title: "Find Your Path",
     subtitle: "Personalised assessment",
-    imageUrl: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1200&q=80",
+    imageAlt: "Focused student working through a self-assessment at their desk",
     link: "/assessment",
   },
   {
     id: 3,
     title: "Track Progress",
     subtitle: "Action modules & checklists",
-    imageUrl: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1974&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&q=80",
+    imageAlt: "Group of students collaborating in a bright NZ classroom",
     link: "/modules",
   },
   {
     id: 4,
     title: "Use Free Tools",
     subtitle: "Credit calculator, scholarships & more",
-    imageUrl: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2090&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80",
+    imageAlt: "Two students comparing notes and planning next steps",
     link: "/tools",
   },
   {
     id: 5,
     title: "Get Into University",
     subtitle: "Applications, funding, everything",
-    imageUrl: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1627556704302-624286467c65?w=1200&q=80",
+    imageAlt: "University graduate celebrating after receiving their degree",
     link: "/guides/how-to-get-into-university",
   },
 ];
@@ -59,11 +67,13 @@ function AccordionItem({
       }`}
       onMouseEnter={onMouseEnter}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <FallbackImage
         src={item.imageUrl}
-        alt={item.title}
-        className="absolute inset-0 w-full h-full object-cover"
+        alt={item.imageAlt}
+        width={800}
+        height={420}
+        fill
+        className="object-cover"
       />
       <div
         className={`absolute inset-0 transition-all duration-500 ${
@@ -144,17 +154,20 @@ export function HeroAccordion() {
             />
           ))}
         </div>
-        {/* Mobile: single featured image */}
+        {/* Mobile: single featured image — distinct from accordion panels and guide images. */}
+        {/* TODO(images): verify this photo renders; swap if broken. */}
         <div className="lg:hidden relative h-[300px] rounded-2xl overflow-hidden shadow-xl shadow-navy/10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop"
-            alt="Students studying together"
-            className="w-full h-full object-cover"
+          <FallbackImage
+            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80"
+            alt="New Zealand university students on campus on a sunny day"
+            width={1200}
+            height={600}
+            fill
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1B2A4A]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1B2A4A]/70 to-transparent" aria-hidden="true" />
           <div className="absolute bottom-6 left-6 right-6">
-            <p className="text-white/80 text-sm">Join students already using Navigate NZ</p>
+            <p className="text-white/80 text-sm">Built for families navigating NZ education for the first time</p>
             <p className="text-white text-lg font-bold">Find your path to university</p>
           </div>
         </div>
